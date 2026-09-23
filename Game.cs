@@ -16,8 +16,9 @@ class Game
     {
       // Test items so you can try any location right away. Only while isDev is true -
       // in the real game the player finds these in the toilet stall (group 1).
-      player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
-      player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));
+      /*player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
+      player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));*/
+      // DECISION: Let's start with nothing!
     }
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)
