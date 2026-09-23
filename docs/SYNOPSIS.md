@@ -24,11 +24,11 @@ Rad 0 är norr, kolumn 0 är väster. Rad 0 är översta våningen (taket), rad 
 | **rad 3** | – | – | Kemtvätten (`DryCleaner`) | Vaktkontoret (`SecurityOffice`) | Taxistationen (`TaxiStation`) | Bröllopet (`Wedding`) |
 | **rad 4** | – | – | Bakrummet (`BackRoom`) | Övervakningsrummet (`SurveillanceRoom`) | – | – |
 
-Utgångar skapas automatiskt mellan grannrutor. Vill en plats dölja en utgång – en låst dörr – sätter den `Directions` själv (se `docs/KODANDRINGEN.md`, punkt 4).
+Utgångar skapas automatiskt mellan grannrutor. Vill en plats dölja en utgång – en låst dörr – sätter den `Directions` själv (se artikeln *Kodändringen: så kan varje grupp bygga sin egen del*, punkt 4).
 
 ## Kluster – ett per grupp
 
-Varje grupp äger ett **kluster**: två–tre platser, minst en npc och en delgåta. Klustret ska gå att spela för sig (se `docs/KODANDRINGEN.md`, punkt 9). Kontraktet mot resten av spelet:
+Varje grupp äger ett **kluster**: två–tre platser, minst en npc och en delgåta. Klustret ska gå att spela för sig (se kodändringsartikeln, punkt 9). Kontraktet mot resten av spelet:
 
 - Klustret **ger** de föremål som står i tabellen, med exakt de namnen.
 - Klustret får **kräva** föremål från andra kluster – men bara de som står i tabellen, och det ska gå att testa genom att lägga föremålet i ryggsäcken vid start.
@@ -78,7 +78,7 @@ Vi jobbar alla i **samma repo** – inga forkar. `main` är skyddad: ingen kan p
 
 ## Så jobbar en grupp
 
-1. Läs `docs/KODANDRINGEN.md` – den förklarar `Interact`, `Npc`, ryggsäcken och hur ni testar er del.
+1. Läs artikeln *Kodändringen: så kan varje grupp bygga sin egen del* – den förklarar `Interact`, `Npc`, ryggsäcken och hur ni testar er del.
 2. Fyll i era platser i `Locations/` (klasserna finns redan, tomma) och skapa era npc:er i `Npcs/`.
 3. Testa genom att ändra startpositionen i `Game.cs` till er plats – och ta bort den ändringen innan ni gör pull request.
 4. Committa och pusha till er branch ofta. Dra ner varandras ändringar med `git pull` innan ni börjar jobba, så slipper ni konflikter inom gruppen.
@@ -87,7 +87,7 @@ Vi jobbar alla i **samma repo** – inga forkar. `main` är skyddad: ingen kan p
 Regler för att PR:ar ska gå att slå ihop:
 
 - Rör bara era egna filer i `Locations/` och `Npcs/`.
-- **Gemensamma filer som ni inte ändrar:** `Game.cs`, `Map.cs`, `Player.cs`, `Menu.cs`, `Backpack.cs`, `Item.cs`, `Npc.cs`, `Location.cs`, `Direction.cs`, `IInteractable.cs`. Ändrar en grupp där får alla andra konflikter. Behöver ni något som inte går att göra i er egen klass – säg till läraren, så löser vi det i `main` för alla. Enda undantaget är de två testraderna i `Game.Start()` (se `KODANDRINGEN.md`, punkt 9), och de ska bort före PR.
+- **Gemensamma filer som ni inte ändrar:** `Game.cs`, `Map.cs`, `Player.cs`, `Menu.cs`, `Backpack.cs`, `Item.cs`, `Npc.cs`, `Location.cs`, `Direction.cs`, `IInteractable.cs`. Ändrar en grupp där får alla andra konflikter. Behöver ni något som inte går att göra i er egen klass – säg till läraren, så löser vi det i `main` för alla. Enda undantaget är testraden i `Game.Start()` (se kodändringsartikeln, punkt 9), och den ska bort före PR.
 - Pusha bara till er egen branch.
 - All kod på engelska (klassnamn, metoder, variabler, kommentarer), all speltext på svenska.
 - Föremål: exakt den sträng som står i tabellen. Behöver ni ett nytt föremål, skriv in det i tabellen i er PR.

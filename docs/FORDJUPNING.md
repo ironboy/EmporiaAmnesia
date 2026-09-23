@@ -1,6 +1,6 @@
 # Komposition, arv och ansvar i Emporia Amnesia
 
-Ni har byggt i två dagar. Nu är det dags att titta på *hur* koden hänger ihop – inte för att ändra den, utan för att kunna förklara den. Det är det inlämningsuppgiften och projektet kommer att kräva: "motivera dina designval". Klassdiagrammet över hela motorn finns på bloggen (och som `docs/uml.html` i repot – ladda ner och öppna i webbläsaren).
+Ni har byggt i två dagar. Nu är det dags att titta på *hur* koden hänger ihop – inte för att ändra den, utan för att kunna förklara den. Det är det inlämningsuppgiften och projektet kommer att kräva: "motivera dina designval". Ha klassdiagrammet över hela motorn bredvid er när ni läser.
 
 ## 1. Två sätt att återanvända: arv och komposition
 

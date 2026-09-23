@@ -333,7 +333,7 @@ if (player.Backpack.Has("kemtvättskvitto"))
 }
 ```
 
-**Stava rätt.** `Has("kemtvättskvitto")` jämför strängen exakt. Föremålens namn står i `docs/SYNOPSIS.md` – använd dem bokstav för bokstav, med små bokstäver.
+**Stava rätt.** `Has("kemtvättskvitto")` jämför strängen exakt. Föremålens namn står i tabellen i artikeln *Emporia Amnesia – synopsis och arbetsfördelning* – använd dem bokstav för bokstav, med små bokstäver.
 
 ## 8. Avsluta spelet
 
@@ -352,4 +352,4 @@ if (isDev)
 }
 ```
 
-**Ta bort er rad innan ni gör pull request** – `Game.cs` är gemensam, och två grupper som lagt till varsin rad där ger en konflikt. Läraren sätter `isDev = false` när spelet är klart. Vilka filer som är gemensamma står i `docs/SYNOPSIS.md` under reglerna.
+**Ta bort er rad innan ni gör pull request** – `Game.cs` är gemensam, och två grupper som lagt till varsin rad där ger en konflikt. Läraren sätter `isDev = false` när spelet är klart. Vilka filer som är gemensamma står under reglerna i synopsisartikeln.
