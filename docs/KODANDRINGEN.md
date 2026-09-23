@@ -8,16 +8,17 @@ På vägen dit dyker fyra nya begrepp upp: **interface**, **enum**, **statiska m
 
 | Fil | Vad |
 |---|---|
-| `Location.cs` | Ny metod `Interact(Player)` som varje plats kan skriva över. `Directions` är nu en `Direction[]` i stället för strängar. |
+| `Location.cs` | Ny metod `Interact(Player)` som varje plats kan skriva över. `Directions` är nu en `Direction[]` i stället för strängar – och fylls i automatiskt från kartan. |
 | `Npc.cs` (ny) | Basklass för personer man kan prata med. Fungerar precis som `Location`. |
 | `IInteractable.cs` (ny) | Ett interface som både `Location` och `Npc` implementerar. |
 | `Direction.cs` (ny) | En enum med de fyra riktningarna + en statisk hjälpklass som ger svensk text. |
 | `Item.cs` | Konstruktor med namn och beskrivning, och en `ToString()`. |
 | `Backpack.cs` | Färdig: `Add`, `Has`, `Remove`, `Print`. |
 | `Menu.cs` | Färdig: `Ask(rubrik, alternativ)` visar en numrerad meny och returnerar valet. |
-| `Player.cs` | Ny egenskap `GameOver` som avslutar spelet. |
+| `Player.cs` | Ny egenskap `GameOver` som avslutar spelet, och `Teleport("Klassnamn")` som flyttar spelaren till en plats. |
 | `Game.cs` | Menyn går via `Menu.Ask`. "Undersök", "Ta föremål", "Interagera" och "Ryggsäcken" fungerar. |
-| `Map.cs` | Kartan är 5×6 med fyra nya tomma platser: `ParkingDeck`, `BackRoom`, `SurveillanceRoom`, `Wedding`. |
+| `Map.cs` | Kartan är 5×6 med fyra nya tomma platser: `ParkingDeck`, `BackRoom`, `SurveillanceRoom`, `Wedding`. Kartan är statisk och räknar ut varje plats utgångar. |
+| `Locations/OutsideDryCleaner.cs`, `Locations/SecurityOffice.cs`, `Npcs/Guard.cs` | Färdiga **exempel** på en plats med pussel, en plats som lämnar över till en npc, och en npc. Grupp 3 och 4 bygger vidare på dem. |
 
 Ni jobbar bara i **era egna filer i `Locations/`** (och skapar era npc:er i `Npcs/`). Resten är gemensamt och ändras bara av läraren.
 
@@ -43,7 +44,6 @@ class OutsideDryCleaner : Location
   {
     Name = "Utanför kemtvätten";
     Description = "En glasdörr med ett kodlås. Kemtvätten är mörk där inne.";
-    Directions = [Direction.North, Direction.South, Direction.East];
   }
 
   public override void Interact(Player player)
@@ -60,14 +60,15 @@ class OutsideDryCleaner : Location
     if (attempts == 3)
     {
       Console.WriteLine("LARM! En vakt kommer springande och släpar iväg dig.");
-      player.Row = 3;   // the security office, see Map.cs
-      player.Col = 3;
+      player.Teleport("SecurityOffice");
     }
   }
 }
 ```
 
-Tre saker att lägga märke till: `override` säger att vi byter ut basklassens `Interact`; platsen har **eget minne** (`attempts`) som lever mellan spelarens drag; och platsen får `player` skickad till sig, så den kan titta i ryggsäcken (`player.Backpack.Has("...")`) och till och med flytta spelaren.
+Tre saker att lägga märke till: `override` säger att vi byter ut basklassens `Interact`; platsen har **eget minne** (`attempts`) som lever mellan spelarens drag; och platsen får `player` skickad till sig, så den kan titta i ryggsäcken (`player.Backpack.Has("...")`) och till och med flytta spelaren – `player.Teleport("SecurityOffice")` letar upp platsen med det klassnamnet på kartan och ställer spelaren där.
+
+Lägg också märke till att `Interact` gärna får **prata direkt med spelaren** med `Console.Write` och `Console.ReadLine()`, utanför huvudmenyn. Det är så kodlåset frågar efter koden. Samma sak funkar för en npc: `"Har du pengar?"` – `ReadLine()` – och svara olika på "ja" och "nej". Det gör dialogen mer mänsklig än en numrerad meny, och kostar bara några rader.
 
 ## 2. Interface – ett löfte om vad en klass kan
 
@@ -101,7 +102,37 @@ foreach (IInteractable thing in things)
 
 ## 3. Npc – personer man kan prata med
 
-`Npc` fungerar exakt som `Location`: sätt `Name` i konstruktorn, skriv över `Interact`. En plats **äger** sina npc:er och anropar dem från sin egen `Interact`:
+`Npc` fungerar exakt som `Location`: sätt `Name` i konstruktorn, skriv över `Interact`. Skillnaden är att `Game` aldrig pratar med en npc direkt – `Game` känner bara till platser. **En plats äger sina npc:er** och lämnar över till dem från sin egen `Interact`. Kedjan är:
+
+```
+Spelaren väljer "Interagera"
+  → Game anropar location.Interact(player)
+    → platsen anropar _guard.Interact(player)
+      → vakten pratar
+```
+
+Så här ser den kortaste versionen ut (det är den som ligger i repot):
+
+```csharp
+class SecurityOffice : Location
+{
+  // A private field: the guard belongs to this room and nobody else sees it.
+  // Convention: private fields start with an underscore and a small letter.
+  private Guard _guard = new();
+
+  public SecurityOffice()
+  {
+    Name = "Säkerhetsvakternas kontor";
+    Description = "Du är på säkerhetsvakternas kontor";
+  }
+
+  public override void Interact(Player player)
+  {
+    // The room hands the interaction over to its npc
+    _guard.Interact(player);
+  }
+}
+```
 
 ```csharp
 class Guard : Npc
@@ -132,35 +163,24 @@ class Guard : Npc
 }
 ```
 
+Vakten har eget minne (`bribed`), precis som kodlåset har `attempts`. Det är hela poängen med att npc:n är ett eget objekt: rummet behöver inte veta om vakten är mutad – det vet vakten själv.
+
+Har platsen **flera** saker att erbjuda – prata med vakten *eller* titta på skärmarna – skapar den en egen `Menu` och frågar först, med samma `Menu.Ask` som `Game` använder:
+
 ```csharp
-class SecurityOffice : Location
+public override void Interact(Player player)
 {
-  private Guard guard = new();
-  private Menu menu = new();
-
-  public SecurityOffice()
+  int choice = new Menu().Ask("Vad gör du?", ["Prata med vakten", "Titta på skärmarna"]);
+  if (choice == 1)
   {
-    Name = "Vaktkontoret";
-    Description = "Ett trångt rum med övervakningsskärmar. Vakten sitter vid dörren.";
-    Directions = [Direction.West, Direction.East, Direction.South];
+    _guard.Interact(player);
   }
-
-  public override void Interact(Player player)
+  else
   {
-    int choice = menu.Ask("Vad gör du?", ["Prata med vakten", "Titta på skärmarna"]);
-    if (choice == 1)
-    {
-      guard.Interact(player);
-    }
-    else
-    {
-      Console.WriteLine("Skärmarna visar tomma korridorer. Och en sak till...");
-    }
+    Console.WriteLine("Skärmarna visar tomma korridorer. Och en sak till...");
   }
 }
 ```
-
-Vill platsen erbjuda flera saker, som här, skapar den en egen `Menu` och frågar – samma `Menu.Ask` som `Game` använder.
 
 ## 4. Enum – en lista med de enda tillåtna värdena
 
@@ -176,10 +196,22 @@ enum Direction
 }
 ```
 
-En enum är en **egen typ med ett fast antal namngivna värden**. `Direction` kan bara vara ett av de fyra – inget annat. I en plats skriver man:
+En enum är en **egen typ med ett fast antal namngivna värden**. `Direction` kan bara vara ett av de fyra – inget annat.
+
+Ni behöver normalt **inte** sätta `Directions` själva: när kartan byggs tittar `Map` på vilka grannrutor som finns och fyller i varje plats utgångar. Men vill ni **dölja** en utgång – en låst dörr – sätter ni `Directions` i konstruktorn, så låter `Map` den vara:
 
 ```csharp
-Directions = [Direction.North, Direction.East];
+public OutsideDryCleaner()
+{
+  Name = "Utanför kemtvätten";
+  Directions = [Direction.North, Direction.East];   // south (the dry cleaner) is hidden until unlocked
+}
+```
+
+och öppnar dörren senare, i `Interact`, genom att sätta om den:
+
+```csharp
+Directions = [Direction.North, Direction.East, Direction.South];
 ```
 
 Skriver man `Direction.Nort` blir det ett **kompileringsfel** i stället för ett tyst fel i spelet, och editorn föreslår värdena när man skrivit `Direction.`. I `Game` väljs sedan riktning med en `switch` på enum-värdet, precis som på en `int`:
@@ -234,6 +266,8 @@ Ni har använt statiska metoder hela tiden utan att tänka på det: `Console.Wri
 
 **Jämför:** `menu.Ask(...)` är en vanlig metod, den anropas på ett objekt (`menu`). `Directions.Label(...)` är statisk, den anropas på klassen. Tumregel: behöver metoden objektets fält → vanlig. Behöver den bara sina parametrar → kan vara `static`.
 
+**Statiska variabler** finns också. Kartan är en: `Map.Locations` är ett `static` fält, för det finns bara *en* karta i spelet och alla ska se samma. Därför kan `Player.Teleport("SecurityOffice")` leta i `Map.Locations` utan att ha fått något `Map`-objekt skickat till sig. `Map` har dessutom en **statisk konstruktor**, `static Map() { ... }`, som körs en enda gång – när klassen används första gången – och det är där varje plats får sina utgångar ifyllda. En vanlig konstruktor körs varje gång man skriver `new`; en statisk körs en gång per program.
+
 ## 6. ToString() – hur ett objekt blir text
 
 Alla objekt i C# har en metod `ToString()`, ärvd från den allra översta klassen `object`. Standardversionen är nästan oanvändbar – `Console.WriteLine(item)` skrev tidigare bara `Item`, klassens namn. Genom att **skriva över** den bestämmer man själv:
@@ -284,15 +318,15 @@ När spelaren nått bröllopet – eller blivit gripen – sätter platsen `play
 
 ## 9. Testa er del för sig
 
-Allt ligger på samma karta, så ni testar er del genom att starta där:
+Allt ligger på samma karta, så ni testar er del genom att starta där. Lägg tillfälligt in två rader först i `Start()` i `Game.cs`:
 
-1. I `Game.cs`, ändra startpositionen till er plats: `Player player = new(3, 3);` (rad, kolumn – se `Map.cs`).
-2. Behöver ni ett föremål som en annan grupp ger? Lägg tillfälligt in det i `Start()`: `player.Backpack.Add(new Item("pengar"));`
+```csharp
+public void Start()
+{
+  player.Teleport("SecurityOffice");                 // start in YOUR location
+  player.Backpack.Add(new Item("pengar"));           // an item another group gives
+  Console.WriteLine("EMPORIA AMNESIA");
+  ...
+```
 
-**Ta bort de raderna innan ni gör pull request.** De är bara för er testning – i `main` ska startpositionen vara toalettbåset och ryggsäcken tom.
-
-## 10. Vad ni inte rör
-
-`Game.cs`, `Map.cs`, `Menu.cs`, `Backpack.cs`, `Item.cs`, `Npc.cs`, `Location.cs`, `Direction.cs` och `IInteractable.cs` är gemensamma. Ändrar en grupp där får alla andra konflikter. Behöver ni något som inte går att göra i er egen klass – säg till läraren, så löser vi det i `main` för alla.
-
-Undantaget är startpositionen i `Game.cs` för testning, se punkt 9.
+**Ta bort de raderna innan ni gör pull request.** De är bara för er testning – i `main` ska spelet börja i toalettbåset med tom ryggsäck. Vilka filer som är gemensamma och inte ska ändras står i `docs/SYNOPSIS.md` under reglerna.

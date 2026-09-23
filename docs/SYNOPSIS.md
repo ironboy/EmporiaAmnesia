@@ -24,7 +24,7 @@ Rad 0 är norr, kolumn 0 är väster. Rad 0 är översta våningen (taket), rad 
 | **rad 3** | – | – | Kemtvätten (`DryCleaner`) | Vaktkontoret (`SecurityOffice`) | Taxistationen (`TaxiStation`) | Bröllopet (`Wedding`) |
 | **rad 4** | – | – | Bakrummet (`BackRoom`) | Övervakningsrummet (`SurveillanceRoom`) | – | – |
 
-Varje plats bestämmer själv vilka utgångar som visas (`Directions`). Grannrutor i kartan är alltså inte automatiskt öppna – det är er plats som säger "härifrån kan man gå norrut".
+Utgångar skapas automatiskt mellan grannrutor. Vill en plats dölja en utgång – en låst dörr – sätter den `Directions` själv (se `docs/KODANDRINGEN.md`, punkt 4).
 
 ## Kluster – ett per grupp
 
@@ -38,13 +38,13 @@ Varje grupp äger ett **kluster**: två–tre platser, minst en npc och en delg�
 |---|---|---|---|---|---|---|
 | 1 | **Uppvaknandet** | Toalettbåset, Foajén | Städaren – såg dig komma in i går kväll, med någon | Hitta kvittot och pengarna. Städaren minns vad du sa när du kom – en första ledtråd. På kvittots baksida står något skrivet. | – | `"kemtvättskvitto"`, `"pengar"` |
 | 2 | **Rulltrapporna** | Rulltrappa, Korridor A, Rulltrappa upp | Vaktmästaren – rulltrappan upp är avstängd | Få igång rulltrappan till taket. Vaktmästaren vill ha en tjänst först, eller så finns det en lucka med en knapp. Han har ett nyckelkort som han inte borde ha. | – | `"nyckelkort"` |
-| 3 | **Kodlåset** | Utanför kemtvätten, Korridor B | En förbipasserande som "råkat se" koden – eller bluffar | Kodlåset. Tre fel → larm → spelaren flyttas till vaktkontoret. Rätt kod står på kvittots baksida, om man har det. När låset är öppet visas utgången söderut till kemtvätten. | – (kvittot hjälper) | vägen in i kemtvätten |
-| 4 | **Vaktkontoret** | Vaktkontoret, Övervakningsrummet | Vakten | Mutan – vakten vill ha pengarna. Mutad ringer han en taxi och ger dig chaufförens kort. Omutad ringer han polisen, och spelet är slut. På övervakningsskärmarna: vad som hände i natt. | `"pengar"` | `"taxikort"` |
+| 3 | **Kodlåset** | Utanför kemtvätten, Korridor B | En förbipasserande som "råkat se" koden – eller bluffar | **Startkod finns** (`OutsideDryCleaner`): tre fel → larm → teleport till vaktkontoret. Kvar att bygga: dölj utgången söderut tills låset är öppet, koppla koden till kvittots baksida (kom överens med grupp 1!), Korridor B och den förbipasserande. | – (kvittot hjälper) | vägen in i kemtvätten |
+| 4 | **Vaktkontoret** | Vaktkontoret, Övervakningsrummet | Vakten | **Startkod finns** (`SecurityOffice`, `Guard`): vakten tar mutan. Kvar att bygga: en mänskligare dialog med frågor och svar, taxikortet när han är mutad, polisen (och `GameOver`) när han inte är det, och övervakningsrummet där filmen visar vad som hände i natt. | `"pengar"` | `"taxikort"` |
 | 5 | **Kemtvätten** | Kemtvätten, Bakrummet | Kemtvättaren | Kvitto → kostym. "Jag ska ju gifta mig i dag!" Men ringen som låg i fickan har trillat ur – den finns i bakrummet, om kemtvättaren låter dig gå in. | `"kemtvättskvitto"` | `"kostym"`, `"ring"` |
 | 6 | **Taket** | Taket, Parkeringsdäcket | Din blivande svärmor – hon letar efter dig | Dörren till taket kräver nyckelkortet. På parkeringsdäcket står svärmor och röker. Hon vet var bröllopet är – och hur sent det är. | `"nyckelkort"` | `"adressen"` |
 | 7 | **Finalen** | Taxistationen, Bröllopet | Taxichauffören | Chauffören kör bara med taxikortet och adressen. Vid bröllopet: har du kostym och ring? Då `GameOver` – lyckligt. Annars ett annat slut. | `"taxikort"`, `"adressen"`, `"kostym"`, `"ring"` | Slutet |
 
-Kluster 7 beror på alla andras föremål, så den gruppen börjar med de olika sluten och kopplar in kraven i takt med att de andra blir klara.
+Kluster 7 beror på alla andras föremål, så den gruppen börjar med de olika sluten och kopplar in kraven i takt med att de andra blir klara. Kluster 3 och 4 har startkod från genomgången – de grupperna bygger vidare på färdiga exempel i stället för att börja från tomma klasser.
 
 **Öppna frågor som grupperna själva bestämmer:** vad står egentligen på kvittots baksida (grupp 1 och 3 måste komma överens om koden!), vad vill vaktmästaren ha för tjänst, vad visar övervakningsfilmen, och vad händer om man kommer till bröllopet utan ring.
 
@@ -86,7 +86,8 @@ Vi jobbar alla i **samma repo** – inga forkar. `main` är skyddad: ingen kan p
 
 Regler för att PR:ar ska gå att slå ihop:
 
-- Rör bara era egna filer i `Locations/` och `Npcs/`. `Game.cs`, `Map.cs` och de gemensamma klasserna ändras bara av läraren.
+- Rör bara era egna filer i `Locations/` och `Npcs/`.
+- **Gemensamma filer som ni inte ändrar:** `Game.cs`, `Map.cs`, `Player.cs`, `Menu.cs`, `Backpack.cs`, `Item.cs`, `Npc.cs`, `Location.cs`, `Direction.cs`, `IInteractable.cs`. Ändrar en grupp där får alla andra konflikter. Behöver ni något som inte går att göra i er egen klass – säg till läraren, så löser vi det i `main` för alla. Enda undantaget är de två testraderna i `Game.Start()` (se `KODANDRINGEN.md`, punkt 9), och de ska bort före PR.
 - Pusha bara till er egen branch.
 - All kod på engelska (klassnamn, metoder, variabler, kommentarer), all speltext på svenska.
 - Föremål: exakt den sträng som står i tabellen. Behöver ni ett nytt föremål, skriv in det i tabellen i er PR.
