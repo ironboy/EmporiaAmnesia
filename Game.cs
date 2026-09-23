@@ -12,42 +12,18 @@ class Game
 
   public void Start()
   {
-
-    player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
-    player.Backpack.Add(new Item("kvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));
+    if (isDev)
+    {
+      // Test items so you can try any location right away. Only while isDev is true -
+      // in the real game the player finds these in the toilet stall (group 1).
+      player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
+      player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));
+    }
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)
     {
       PlayTurn();
     }
-  }
-
-  // Works out the exits of every location from Map.Locations and returns
-  // them as ready-to-paste "Directions = [...]" lines, one per location.
-  // Paste the line into the location's constructor - and edit it there if
-  // you want to hide an exit that exists on the map.
-  public string DirectionsFromMap()
-  {
-    Location?[][] locations = Map.Locations;
-    string output = "";
-    for (int row = 0; row < locations.Length; row++)
-    {
-      for (int col = 0; col < locations[row].Length; col++)
-      {
-        Location? location = locations[row][col];
-        if (location == null) { continue; }
-
-        List<string> exits = [];
-        foreach (Direction direction in Map.DirectionsFor(row, col))
-        {
-          exits.Add($"Direction.{direction}");
-        }
-
-        output += $"// {location.GetType().Name} (row {row}, col {col})\n";
-        output += $"Directions = [{string.Join(", ", exits)}];\n\n";
-      }
-    }
-    return output;
   }
 
   Location CurrentLocation() // location is an object of type Location (i e Toilet stall, Foyer, ...)

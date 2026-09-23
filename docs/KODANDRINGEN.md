@@ -111,7 +111,7 @@ Spelaren väljer "Interagera"
       → vakten pratar
 ```
 
-Så här ser den kortaste versionen ut (det är den som ligger i repot):
+Så här ser det ut i repot – vaktkontoret är ett rum utan utgångar tills vakten är mutad:
 
 ```csharp
 class SecurityOffice : Location
@@ -124,12 +124,18 @@ class SecurityOffice : Location
   {
     Name = "Säkerhetsvakternas kontor";
     Description = "Du är på säkerhetsvakternas kontor";
+    Directions = [Direction.None];   // locked in - no exits at all
   }
 
   public override void Interact(Player player)
   {
     // The room hands the interaction over to its npc
     _guard.Interact(player);
+    // Allow to leave if guard is bribed
+    if (_guard.Bribed)
+    {
+      Directions = Map.DirectionsFor(this);   // the exits the map would have given us
+    }
   }
 }
 ```
@@ -137,7 +143,7 @@ class SecurityOffice : Location
 ```csharp
 class Guard : Npc
 {
-  private bool bribed = false;
+  public bool Bribed = false;   // public, because the room needs to read it
 
   public Guard()
   {
@@ -146,24 +152,39 @@ class Guard : Npc
 
   public override void Interact(Player player)
   {
-    if (bribed)
+    if (Bribed)
     {
       Console.WriteLine("\"Jag har inte sett dig. Gå nu.\"");
       return;
     }
-    if (player.Backpack.Has("pengar"))
+    Menu bribeMenu = new Menu();
+    int chosen = bribeMenu.Ask("Om du har pengar skulle vi kunna prata om en lösning...", ["Ja", "Nej"]);
+    if (chosen == 2 /* Nej */)
     {
-      player.Backpack.Remove("pengar");
-      bribed = true;
-      Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
-      return;
+      Console.WriteLine("\"Jaså inte det...\"");
+      Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
+      player.GameOver = true;
     }
-    Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
+    else /* Ja */
+    {
+      if (player.Backpack.Has("pengar"))
+      {
+        player.Backpack.Remove("pengar");
+        Bribed = true;
+        Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
+      }
+      else
+      {
+        Console.WriteLine("\"Du ljuger - jag har muddrat dig. Inga pengar!\"");
+        Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
+        player.GameOver = true;
+      }
+    }
   }
 }
 ```
 
-Vakten har eget minne (`bribed`), precis som kodlåset har `attempts`. Det är hela poängen med att npc:n är ett eget objekt: rummet behöver inte veta om vakten är mutad – det vet vakten själv.
+Vakten har eget minne (`Bribed`), precis som kodlåset har `attempts`. Det är hela poängen med att npc:n är ett eget objekt: rummet behöver inte veta *hur* mutan gick till – det räcker att fråga vakten `Bribed` efteråt. Lägg också märke till att vakten ställer sin fråga med en egen `Menu`, och att `player.GameOver = true` är det som avslutar spelet när polisen ringts (mer i punkt 8).
 
 Har platsen **flera** saker att erbjuda – prata med vakten *eller* titta på skärmarna – skapar den en egen `Menu` och frågar först, med samma `Menu.Ask` som `Game` använder:
 
@@ -213,6 +234,8 @@ och öppnar dörren senare, i `Interact`, genom att sätta om den:
 ```csharp
 Directions = [Direction.North, Direction.East, Direction.South];
 ```
+
+Två genvägar: `Directions = [Direction.None];` gör platsen till en återvändsgränd utan utgångar alls (vaktkontoret, tills vakten är mutad), och `Directions = Map.DirectionsFor(this);` ger tillbaka exakt de utgångar kartan skulle ha gett – så ni slipper räkna upp dem själva när dörren öppnas.
 
 Skriver man `Direction.Nort` blir det ett **kompileringsfel** i stället för ett tyst fel i spelet, och editorn föreslår värdena när man skrivit `Direction.`. I `Game` väljs sedan riktning med en `switch` på enum-värdet, precis som på en `int`:
 
@@ -318,15 +341,17 @@ När spelaren nått bröllopet – eller blivit gripen – sätter platsen `play
 
 ## 9. Testa er del för sig
 
-Allt ligger på samma karta, så ni testar er del genom att starta där. Lägg tillfälligt in två rader först i `Start()` i `Game.cs`:
+Allt ligger på samma karta, så ni testar er del genom att hoppa dit. Överst i `Game.cs` finns `bool isDev = true;`. Så länge den är `true` har huvudmenyn ett extra val, **DEV: Teleport** – skriv klassnamnet på er plats (`SecurityOffice`) så står ni där. Dessutom lägger `Start()` några testföremål i ryggsäcken (`pengar`, `kemtvättskvitto`) så att ni kan prova pussel som kräver dem.
+
+Behöver ni ett annat föremål från en annan grupp, lägg till det i samma `if (isDev)`-block i `Start()`:
 
 ```csharp
-public void Start()
+if (isDev)
 {
-  player.Teleport("SecurityOffice");                 // start in YOUR location
-  player.Backpack.Add(new Item("pengar"));           // an item another group gives
-  Console.WriteLine("EMPORIA AMNESIA");
-  ...
+  player.Backpack.Add(new Item("pengar", "..."));
+  player.Backpack.Add(new Item("kemtvättskvitto", "..."));
+  player.Backpack.Add(new Item("nyckelkort"));   // your addition
+}
 ```
 
-**Ta bort de raderna innan ni gör pull request.** De är bara för er testning – i `main` ska spelet börja i toalettbåset med tom ryggsäck. Vilka filer som är gemensamma och inte ska ändras står i `docs/SYNOPSIS.md` under reglerna.
+**Ta bort er rad innan ni gör pull request** – `Game.cs` är gemensam, och två grupper som lagt till varsin rad där ger en konflikt. Läraren sätter `isDev = false` när spelet är klart. Vilka filer som är gemensamma står i `docs/SYNOPSIS.md` under reglerna.
