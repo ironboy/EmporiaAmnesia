@@ -9,7 +9,6 @@ class SecurityOffice : Location
     {
         Name = "Säkerhetsvakternas kontor";
         Description = "Du är på säkersvakternas kontor";
-        Directions = [Direction.North, Direction.East, Direction.South, Direction.West];
     }
 
     public override void Interact(Player player)

@@ -4,6 +4,5 @@ class Foyer : Location
   {
     Name = "Foaje";
     Description = "Jag ser marmorväggar, en ingång till toalettbås söderut, och en rulltrappa åt öster";
-    Directions = [Direction.South, Direction.East];
   }
 }

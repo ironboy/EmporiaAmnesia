@@ -2,7 +2,7 @@ class Map
 {
   // Row 0 is north, column 0 is west. null = nothing there.
   // See docs/SYNOPSIS.md for which group owns which locations.
-  public Location?[][] locations =
+  public static Location?[][] Locations =
   [
     [null,               null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],
     [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null],
@@ -13,26 +13,55 @@ class Map
 
 
 
+  // A static constructor runs once, after the static fields above have been
+  // built - so this is the first moment the whole map exists. Every location
+  // that hasn't chosen its own exits gets them from the map here.
+  static Map()
+  {
+    for (int row = 0; row < Locations.Length; row++)
+    {
+      for (int col = 0; col < Locations[row].Length; col++)
+      {
+        Location? location = Locations[row][col];
+        if (location != null && location.Directions.Length == 0)
+        {
+          location.Directions = DirectionsFor(row, col);
+        }
+      }
+    }
+  }
+
+  // The exits of a position, worked out from which neighbours exist on the map
+  public static Direction[] DirectionsFor(int row, int col)
+  {
+    List<Direction> exits = [];
+    if (PositionExists(row - 1, col)) { exits.Add(Direction.North); }
+    if (PositionExists(row + 1, col)) { exits.Add(Direction.South); }
+    if (PositionExists(row, col - 1)) { exits.Add(Direction.West); }
+    if (PositionExists(row, col + 1)) { exits.Add(Direction.East); }
+    return [.. exits];
+  }
+
   public Location GetLocation(int row, int col)
   {
-    return locations[row][col]!; // ! assertion, we promise this will exist
+    return Locations[row][col]!; // ! assertion, we promise this will exist
   }
 
 
-  public bool PositionExists(int row, int col)
+  public static bool PositionExists(int row, int col)
   {
 
-    if (row < 0 || row >= locations.Length) // is row out of bounds?
+    if (row < 0 || row >= Locations.Length) // is row out of bounds?
     {
       return false;
     }
 
-    if (col < 0 || col >= locations[row].Length) // is col out of bounds?
+    if (col < 0 || col >= Locations[row].Length) // is col out of bounds?
     {
       return false;
     }
 
-    if (locations[row][col] == null) // is position on a null "cell"?
+    if (Locations[row][col] == null) // is position on a null "cell"?
     {
       return false;
     }

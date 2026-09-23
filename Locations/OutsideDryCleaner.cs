@@ -6,7 +6,6 @@ class OutsideDryCleaner : Location
     {
         Name = "Utanför kemtvätten";
         Description = "En glasdörr med ett kodlås. Kemtvätten är mörk där inne.";
-        Directions = [Direction.North, Direction.South, Direction.East];
     }
 
     public override void Interact(Player player)

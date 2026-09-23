@@ -5,18 +5,15 @@ class Player
   public int Row { get; set; }
   public int Col { get; set; }
 
-  private Map _map;
-
   public Backpack Backpack { get; } = new();
 
   // Set this to true in an Interact to end the game (you made it to the wedding - or got arrested)
   public bool GameOver { get; set; }
 
-  public Player(int startRow, int startCol, Map map)
+  public Player(int startRow, int startCol)
   {
     Row = startRow;
     Col = startCol;
-    _map = map;
   }
 
   private void Teleport(int row, int col)
@@ -27,8 +24,8 @@ class Player
 
   public void Teleport(string classNameOfLocation)
   {
-    // locs - just a shorter alias for _map.locations
-    var locs = _map.locations;
+    // locs - just a shorter alias for Map.Locations
+    var locs = Map.Locations;
     // loop through the rows
     for (var row = 0; row < locs.Length; row++)
     {

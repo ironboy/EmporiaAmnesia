@@ -3,16 +3,8 @@ class Game
 
   bool isRunning = true;
   Map map = new();
-  Player player;
+  Player player = new(2, 0);
   Menu menu = new();
-
-  public Game()
-  {
-    // Field initializers can't reference other fields (CS0236), so wire up here
-    // 2,0 temporarily replaced with 3,3 - UNDO LATER!
-    player = new(2, 2, map); // starting position (row, col) = the toilet stall
-  }
-
 
   public void Start()
   {
@@ -21,6 +13,34 @@ class Game
     {
       PlayTurn();
     }
+  }
+
+  // Works out the exits of every location from Map.Locations and returns
+  // them as ready-to-paste "Directions = [...]" lines, one per location.
+  // Paste the line into the location's constructor - and edit it there if
+  // you want to hide an exit that exists on the map.
+  public string DirectionsFromMap()
+  {
+    Location?[][] locations = Map.Locations;
+    string output = "";
+    for (int row = 0; row < locations.Length; row++)
+    {
+      for (int col = 0; col < locations[row].Length; col++)
+      {
+        Location? location = locations[row][col];
+        if (location == null) { continue; }
+
+        List<string> exits = [];
+        foreach (Direction direction in Map.DirectionsFor(row, col))
+        {
+          exits.Add($"Direction.{direction}");
+        }
+
+        output += $"// {location.GetType().Name} (row {row}, col {col})\n";
+        output += $"Directions = [{string.Join(", ", exits)}];\n\n";
+      }
+    }
+    return output;
   }
 
   Location CurrentLocation() // location is an object of type Location (i e Toilet stall, Foyer, ...)
@@ -111,7 +131,7 @@ class Game
     {
       Console.WriteLine("Du kan bara flytta dig i en riktning i taget");
     }
-    else if (map.PositionExists(player.Row + rowMove, player.Col + colMove))
+    else if (Map.PositionExists(player.Row + rowMove, player.Col + colMove))
     {
       player.Row = player.Row + rowMove;
       player.Col = player.Col + colMove;
