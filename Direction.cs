@@ -5,7 +5,8 @@ enum Direction
   North,
   South,
   West,
-  East
+  East,
+  None   // Directions = [Direction.None]; makes a location a dead end with no exits
 }
 
 // Static helpers for directions. No object is needed - you call them on the
@@ -20,6 +21,7 @@ static class Directions
       case Direction.South: return "Söder";
       case Direction.West: return "Väster";
       case Direction.East: return "Öster";
+      case Direction.None: return "Ingen";
       default: return direction.ToString();
     }
   }

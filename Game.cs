@@ -12,6 +12,9 @@ class Game
 
   public void Start()
   {
+
+    player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
+    player.Backpack.Add(new Item("kvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)
     {
@@ -107,7 +110,7 @@ class Game
   void ChooseDirection()
   {
     Direction[] directions = CurrentLocation().Directions;
-    if (directions.Length == 0)
+    if (directions.Length == 0 || directions.Contains(Direction.None))
     {
       Console.WriteLine("Det finns ingen väg härifrån.");
       return;

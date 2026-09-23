@@ -1,6 +1,6 @@
 class Guard : Npc
 {
-    private bool bribed = false;
+    public bool Bribed = false;
 
     public Guard()
     {
@@ -9,18 +9,38 @@ class Guard : Npc
 
     public override void Interact(Player player)
     {
-        if (bribed)
+        if (Bribed)
         {
             Console.WriteLine("\"Jag har inte sett dig. Gå nu.\"");
             return;
         }
-        if (player.Backpack.Has("pengar"))
+        Menu bribeMenu = new Menu();
+        int chosen = bribeMenu.Ask(
+            "Om du har pengar skulle vi kunna prata om en lösning...",
+            ["Ja", "Nej"]
+        );
+        if (chosen == 2 /*Nej*/)
         {
-            player.Backpack.Remove("pengar");
-            bribed = true;
-            Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
-            return;
+            Console.WriteLine("\"Jaså inte det...\"");
+            Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
+            player.GameOver = true;
         }
-        Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
+        else /* Ja */
+        {
+            if (player.Backpack.Has("pengar"))
+            {
+
+                player.Backpack.Remove("pengar");
+                Bribed = true;
+                Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
+            }
+            else
+            {
+                Console.WriteLine("\"Du ljuger - jag har muddrat dig. Inga pengar!");
+                Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
+                player.GameOver = true;
+            }
+        }
+
     }
 }

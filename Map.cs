@@ -31,6 +31,23 @@ class Map
     }
   }
 
+  // The exits of a location, worked out from the map. Call this from a
+  // location to reopen its exits, e.g. Directions = Map.DirectionsFor(this);
+  public static Direction[] DirectionsFor(Location location)
+  {
+    for (int row = 0; row < Locations.Length; row++)
+    {
+      for (int col = 0; col < Locations[row].Length; col++)
+      {
+        if (Locations[row][col] == location)
+        {
+          return DirectionsFor(row, col);
+        }
+      }
+    }
+    return []; // not on the map
+  }
+
   // The exits of a position, worked out from which neighbours exist on the map
   public static Direction[] DirectionsFor(int row, int col)
   {

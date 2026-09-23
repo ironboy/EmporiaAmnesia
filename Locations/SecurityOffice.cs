@@ -9,6 +9,7 @@ class SecurityOffice : Location
     {
         Name = "Säkerhetsvakternas kontor";
         Description = "Du är på säkersvakternas kontor";
+        Directions = [Direction.None];
     }
 
     public override void Interact(Player player)
@@ -16,5 +17,10 @@ class SecurityOffice : Location
         // When the player asks to interact with the location
         // then the room can start an interaction with an NPC
         _guard.Interact(player);
+        // Allow to leave if guard is bribed
+        if (_guard.Bribed)
+        {
+            Directions = Map.DirectionsFor(this);
+        }
     }
 }

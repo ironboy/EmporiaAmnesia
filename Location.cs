@@ -6,7 +6,8 @@ class Location : IInteractable
   // Which exits the movement menu shows here. Map fills this in from the
   // neighbours in Map.Locations when the map is built, so you don't need to
   // set it. Assign it in your constructor only to override that,
-  // e.g. Directions = [Direction.North]; to hide the other exits.
+  // e.g. Directions = [Direction.North]; to hide the other exits,
+  // or Directions = [Direction.None]; for a dead end with no exits at all.
   public Direction[] Directions { get; set; } = [];
 
   // Items lying around here. "Undersök platsen" lists them,
