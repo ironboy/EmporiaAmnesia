@@ -341,16 +341,14 @@ När spelaren nått bröllopet – eller blivit gripen – sätter platsen `play
 
 ## 9. Testa er del för sig
 
-Allt ligger på samma karta, så ni testar er del genom att hoppa dit. Överst i `Game.cs` finns `bool isDev = true;`. Så länge den är `true` har huvudmenyn ett extra val, **DEV: Teleport** – skriv klassnamnet på er plats (`SecurityOffice`) så står ni där. Dessutom lägger `Start()` några testföremål i ryggsäcken (`pengar`, `kemtvättskvitto`) så att ni kan prova pussel som kräver dem.
+Allt ligger på samma karta, så ni testar er del genom att hoppa dit. Överst i `Game.cs` finns `bool isDev = true;`. Så länge den är `true` har huvudmenyn ett extra val, **DEV: Teleport** – skriv klassnamnet på er plats (`SecurityOffice`) så står ni där.
 
-Behöver ni ett annat föremål från en annan grupp, lägg till det i samma `if (isDev)`-block i `Start()`:
+Behöver ni ett föremål som en annan grupp ger, lägg det i ryggsäcken i `if (isDev)`-blocket i `Start()` (det är tomt i `main` – spelet börjar utan något):
 
 ```csharp
 if (isDev)
 {
-  player.Backpack.Add(new Item("pengar", "..."));
-  player.Backpack.Add(new Item("kemtvättskvitto", "..."));
-  player.Backpack.Add(new Item("nyckelkort"));   // your addition
+  player.Backpack.Add(new Item("pengar"));   // your test item
 }
 ```
 
