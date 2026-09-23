@@ -19,6 +19,9 @@ class Game
       /*player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
       player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));*/
       // DECISION: Let's start with nothing!
+
+      // We need a keycard to test grupp 6 part with
+      player.Backpack.Add(new Item("Nyckelkort", "Ett nyckelkort kan det användas för stängda avdelningar?"));
     }
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)
