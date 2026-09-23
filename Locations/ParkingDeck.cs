@@ -1,0 +1,4 @@
+class ParkingDeck : Location
+{
+
+}

@@ -1,0 +1,4 @@
+class Wedding : Location
+{
+
+}
