@@ -16,4 +16,10 @@ class Player
     Col = startCol;
   }
 
+  public void Teleport(int row, int col)
+  {
+    Row = row;
+    Col = col;
+  }
+
 }

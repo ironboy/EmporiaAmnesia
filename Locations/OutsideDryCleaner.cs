@@ -24,9 +24,8 @@ class OutsideDryCleaner : Location
         {
             Console.WriteLine("LARM! En vakt kommer springande och släpar iväg dig.");
             // This how you "teleport" the player to a different location
-            // based on the map coordinates
-            player.Row = 3;   // the security office, see Map.cs
-            player.Col = 3;
+            // based on the map coordinates, 3, 3 is the security office
+            player.Teleport(3, 3);
         }
     }
 }
