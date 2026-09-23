@@ -2,9 +2,16 @@ class Game
 {
 
   bool isRunning = true;
-  Player player = new(2, 0); // starting position (row, col) = the toilet stall
   Map map = new();
+  Player player;
   Menu menu = new();
+
+  public Game()
+  {
+    // Field initializers can't reference other fields (CS0236), so wire up here
+    // 2,0 temporarily replaced with 3,3 - UNDO LATER!
+    player = new(2, 2, map); // starting position (row, col) = the toilet stall
+  }
 
 
   public void Start()
