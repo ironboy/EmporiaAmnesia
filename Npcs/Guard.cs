@@ -54,7 +54,7 @@ class Guard : Npc
 
                     player.Backpack.Remove("pengar");
                     Bribed = true;
-                    GiveTaxiCard(player);
+                   GiveTaxiCard(player);
                     Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
                 }
                 else
