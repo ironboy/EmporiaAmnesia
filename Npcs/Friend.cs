@@ -2,6 +2,7 @@ class Friend : Npc
 {
     private bool talkToFriend = true;
     public bool FindFriend = false;
+    private int count = 0;
 
     public Friend()
     {
@@ -14,6 +15,12 @@ class Friend : Npc
         
         while (friendInt)
         {
+            Console.Clear();
+            if (count >= 2)
+            {
+                System.Console.WriteLine("Din vän vägrar vakna. Du börjar rota i hans fickor. Du hittar en bunt med pengar, 25000kr");
+                
+            }
             System.Console.WriteLine("Din vän ligger utslagen på golvet. ");
             if (talkToFriend == true)
             {
@@ -25,9 +32,11 @@ class Friend : Npc
                 {
                     case 1:
                         System.Console.WriteLine("Ugghhhh..");
+                        count++;
                         break;
                     case 2:
                         System.Console.WriteLine("Sluta...");
+                        count++;
                         break;
                 }
             }
