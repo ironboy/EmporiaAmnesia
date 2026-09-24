@@ -18,6 +18,7 @@ class Foyer : Location
     {
       _friend.Interact(player);
       Items.Add(new Item("pengar", "25.000kr!!"));
+      player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
     }
     else
     {
