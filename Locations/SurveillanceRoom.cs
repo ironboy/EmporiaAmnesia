@@ -77,10 +77,38 @@ class SurveillanceRoom : Location
 
 private void Play(Camera camera)
     {
-        
+        Console.WriteLine($"\n[{Label(camera)}]");
+        switch (camera)
+        {
+            case Camera.DryCleaner:
+                Console.WriteLine("Du står vid disken och lämnar in en kostym. Rödvin över hela kavajen.");
+                Console.WriteLine("Du pekar på klockan och håller upp ett finger: Du ska hämta den om 1 timme. Kemtvättaren nickar.");
+                break;
+            case Camera.Entrance:
+                Console.WriteLine("Dörrarna glider upp. In kommer du, arm i arm med en man i fluga.");
+                Console.WriteLine("Ni ser fulla ut och du bär en spritflaska...");
+                break;
+            case Camera.Escalator:
+                Console.WriteLine("Du försöker gå uppför rulltrappan åt fel håll. Mannen i fluga drar ner dig skrattandes.");
+                Console.WriteLine("Han tar fram en bunt sedlar, pekar på dig och säger något.");
+                Console.WriteLine("Du ler brett och ger honom en kram. Han går tillbaka mot entren efter att ha pekat dig i riktningen mot rätt rulltrappa.");
+                break;
+            case Camera.Toilets:
+                Console.WriteLine("Du springer in i toalettbåsen med handen över munnen.");
+                Console.WriteLine("Du snubblar en gång men går snabbt upp och öppnar toalettbåsens dörr hastigt.");
+                break;
+                case Camera.Entrance2:
+                Console.WriteLine("Mannen i flugan blir mött av en säkerhetsvakt vid entren.");
+                Console.WriteLine("Säkerhetsvakten pekar på sin klocka medan han eskorterar ut mannen i flugan.");
+                break;
+            case Camera.Toilets2:
+                Console.WriteLine("Du ser dig själv komma ut långsamt, vinglandes och förrvirrad över hur du hamnade där.");                
+                break;
+        }
     }
 
-// När alla filmer har setts, flöder vår minne tillbaka.
+
+// När alla filmer har setts, flöder vårt minne tillbaka.
     private void Remember()
     {
         Console.WriteLine("\nBilderna faller på plats. Mannen i fluga är din bästa vän och best man.");
