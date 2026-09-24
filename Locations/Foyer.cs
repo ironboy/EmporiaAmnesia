@@ -18,11 +18,8 @@ class Foyer : Location
     if (friend == true)
     {
       _friend.Interact(player);
-      if (!_Money)
-      {
-        player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
-        _Money = true;
-      }
+      Items.Add(new Item("pengar", "25.000kr!!"));
+      player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
     }
     else
     {
