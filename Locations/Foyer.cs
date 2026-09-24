@@ -10,6 +10,16 @@ class Foyer : Location
 
   public override void Interact(Player player)
   {
-    _cleaner.Interact(player);
+    bool cleaner = true;
+    if (cleaner == true)
+    {
+      _cleaner.Interact(player);
+    }
+    else
+    {
+      
+    }
+
+    
   }
 }
