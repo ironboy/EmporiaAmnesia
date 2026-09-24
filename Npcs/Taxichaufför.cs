@@ -32,32 +32,34 @@ class TaxiDriver : Npc
         else if (player.Backpack.Has("adressen") && !player.Backpack.Has("taxikort"))
         {
             Console.WriteLine("\"Sorry grabben! Du saknar taxikortet! Kan tyvärr inte köra dig..\"");
-        }
-        else
-        {
-            Console.WriteLine("\"Försök och hitta kortet! Jag kan vänta.\"");
-        }
-        
-        
-        int bönfall = taxiMenu.Ask("Snälla chauffören! Jag ska gifta mig och min brud väntar på mig i någon kyrka i malmö. Kan du inte bara köra mig till närmaste 10 kyrkor...",
-        ["Böna och be", "Ge upp" ]);
-
-        if (bönfall == 1)
-        {
-            Console.WriteLine("\"Ok! Grabben! Du har övertalat mig. Vi försöker hitta ditt bröllopp. Vart det nu än är? \"");
-            Console.WriteLine("\"Hoppas vi hittar rätt kyrka.\"");
-            Taxiresa = true;
-        }
-        else if (player.Backpack.Has("taxikort"))
-        {
-            player.Backpack.Remove("taxikort");
-        }
-        else if (bönfall == 2)
-        {
-            Console.WriteLine("\"Detta var den sista kyrka vi körde till! Tyvärr du får gifta dig en annan dag.\"");
             player.GameOver = true;
         }
-                   
+        else if (!player.Backpack.Has("adressen") && player.Backpack.Has("taxikort"))
+        {
+        
+           int bönfall = taxiMenu.Ask("Snälla chauffören! Jag ska gifta mig och min brud väntar på mig i någon kyrka i malmö. Kan du inte bara köra mig till närmaste 10 kyrkor...",
+           ["Böna och be", "Ge upp" ]);
+        
+            if (bönfall == 1)
+            {
+                Console.WriteLine("\"Ok! Grabben! Du har övertalat mig. Vi försöker hitta ditt bröllopp. Vart det nu än är? \"");
+                Console.WriteLine("\"Hoppas vi hittar rätt kyrka.\"");
+                Taxiresa = true;
+
+                player.Backpack.Remove("taxikort");
+            }
+            else if (bönfall == 2)
+            {
+                Console.WriteLine("\"Detta var den sista kyrka vi körde till! Tyvärr du får gifta dig en annan dag.\"");
+                player.GameOver = true;
+            }
+            
+        } 
+        else 
+        {
+            Console.WriteLine("\"Du har varken adressen eller taxikort.\"");
+            player.GameOver = true;
+        }         
     }
 
 }       
