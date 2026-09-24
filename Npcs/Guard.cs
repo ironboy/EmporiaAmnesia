@@ -1,6 +1,7 @@
 class Guard : Npc
 {
     public bool Bribed = false;
+    public bool gaveTaxiCard = false;
 
     public Guard()
     {
@@ -14,16 +15,16 @@ class Guard : Npc
 
 
         List<string> GuardConversation = [
-            "1. Jag vaknade här",
+            "1. \"Jag vaknade här\"",
             "2. Du försöker att attackera vakten",
-            "3. Jag hittar inte ut..."
+            "3. \"Ring polisen då, jag bryr mig inte\""
         ];
 
         foreach (string gaurdchoice in GuardConversation)
         {
             Console.WriteLine(gaurdchoice);
         }
-        Console.WriteLine("\nVad vill du göra? ");
+        Console.WriteLine("\nGör ett val: ? ");
         int choice = int.Parse(Console.ReadLine()!);
 
         if (choice == 1)
@@ -53,13 +54,15 @@ class Guard : Npc
 
                     player.Backpack.Remove("pengar");
                     Bribed = true;
+                    GiveTaxiCard(player);
                     Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
                 }
                 else
                 {
                     Console.WriteLine("\"Du ljuger - jag har muddrat dig. Inga pengar!");
                     Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
-                    player.GameOver = true;
+                    CallPolice(player);
+                    return;
                 }
             }
 
@@ -69,11 +72,20 @@ class Guard : Npc
             Console.WriteLine("Du försöker att attackera vakten, men du har ingen chans och han knockar dig");
             player.GameOver = true;
         }
-        /*
         else if (choice == 3)
         {
-            
+            Console.WriteLine("Som du vill");
+            CallPolice(player);
+            return;
         }
-        */
     }
+
+    private void CallPolice(Player player)
+    {
+        Console.WriteLine("Vakten lyfter telefonen och ringer polisen");
+        Console.WriteLine("\"Du stannar här tills de kommer\"");
+        Console.WriteLine("\nGAME OVER. Bröloppet blir av utan dig");
+        player.GameOver = true;
+    }
+
 }
