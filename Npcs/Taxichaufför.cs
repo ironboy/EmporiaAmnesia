@@ -44,7 +44,7 @@ class TaxiDriver : Npc
 
         if (bönfall == 1)
         {
-            Console.WriteLine("\"Ok! Grabben vi kör dig till brölpppet. Vart det nu än är? \"");
+            Console.WriteLine("\"Ok! Grabben! Du har övertalat mig. Vi försöker hitta ditt bröllopp. Vart det nu än är? \"");
             Console.WriteLine("\"Hoppas vi hittar rätt kyrka.\"");
             Taxiresa = true;
         }
@@ -52,15 +52,12 @@ class TaxiDriver : Npc
         {
             player.Backpack.Remove("taxikort");
         }
-        else
+        else if (bönfall == 2)
         {
-            Console.WriteLine("\"Har du ingen adress kan jag tyvärr inte köra dig.\"");
+            Console.WriteLine("\"Detta var den sista kyrka vi körde till! Tyvärr du får gifta dig en annan dag.\"");
+            player.GameOver = true;
         }
-
-
-           
-            
-                
+                   
     }
 
 }       
