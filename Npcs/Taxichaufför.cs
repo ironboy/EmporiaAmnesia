@@ -34,6 +34,7 @@ class TaxiDriver : Npc
             else 
             {
                 Console.WriteLine("\"Du saknar antigen adressen eller taxikor.\" ");
+                player.GameOver = true;
             }
         
         }
