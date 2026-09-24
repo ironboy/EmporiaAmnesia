@@ -19,7 +19,8 @@ class Friend : Npc
             if (count >= 2)
             {
                 System.Console.WriteLine("Din vän vägrar vakna. Du börjar rota i hans fickor. Du hittar en bunt med pengar, 25000kr");
-                
+                friendInt = false;
+                continue;
             }
             System.Console.WriteLine("Din vän ligger utslagen på golvet. ");
             if (talkToFriend == true)
