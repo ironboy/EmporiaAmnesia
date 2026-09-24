@@ -15,7 +15,7 @@ class Wedding : Location
         if(player.Backpack.Has("kostym")&& player.Backpack.Has("ring"))
         {
             Console.WriteLine($"Du kommer fram till bröllopet i tid. Du ser fantastisk ut och ringen förbered för att skapa din dröm äktenskap med din kärleksfull fiancé. Hon ser fantastiks ut också och du kommer fram för att börja bröllopet...\n Efter en tag prästen be dig att sätta på ringen. Senare kommer till punkten där han frågar. \"Vill du gifta dig med henne? ...\" Plöstligt tiden stannar för dig själv och du börjar att fundera på alla hinder du har fått för att nå hit..i denna stunden... Du börjar undrar om någon har sett dig i den situationen för att hindra dig göra ett misttag. Efter en lång genomgån på dina känslor bestämde du dig att...");
-            Console.WriteLine("Vill du försätta med bröllopet eller avbryta dem? y/n");
+            Console.WriteLine("Vill du försätta med bröllopet eller avbryta dem? j/n");
             string? answer = Console.ReadLine();
             while(answer?.ToLower() != "j" || answer?.ToLower() != "n")
             {
