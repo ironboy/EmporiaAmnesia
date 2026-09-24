@@ -1,6 +1,7 @@
 class Foyer : Location
 {
   private Cleaner _cleaner = new();
+  private Friend _friend = new();
 
   public Foyer()
   {
@@ -11,6 +12,17 @@ class Foyer : Location
   public override void Interact(Player player)
   {
     bool cleaner = true;
+    bool friend = true;
+
+    if (friend == true)
+    {
+      _friend.Interact(player);
+    }
+    else
+    {
+      
+    }
+
     if (cleaner == true)
     {
       _cleaner.Interact(player);
