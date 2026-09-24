@@ -17,6 +17,7 @@ class Foyer : Location
     if (friend == true)
     {
       _friend.Interact(player);
+      Items.Add(new Item("Kuvert", "25.000kr!!"));
     }
     else
     {
