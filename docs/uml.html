@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emporia Amnesia Class Diagram</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --ink: #1f2428;
+    --muted: #5d6670;
+    --rule: #d8d5cc;
+    --panel: #ffffff;
+    --accent: #2f6f8f;
+    --helper: #e8eef3;
+    --student: #fbefd9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17191c;
+      --ink: #e6e4de;
+      --muted: #a0a7ae;
+      --rule: #34393f;
+      --panel: #1f2226;
+      --accent: #7fb6d3;
+      --helper: #22303a;
+      --student: #3a2f1e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17191c;
+    --ink: #e6e4de;
+    --muted: #a0a7ae;
+    --rule: #34393f;
+    --panel: #1f2226;
+    --accent: #7fb6d3;
+    --helper: #22303a;
+    --student: #3a2f1e;
+  }
+  html { color-scheme: light dark; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding-inline: 16px;
+    padding-block: 32px 48px;
+  }
+  main { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; font-weight: 600; margin: 0 0 4px; text-wrap: balance; }
+  h2 { font-size: 1.05rem; font-weight: 600; margin: 32px 0 8px; }
+  .lede { color: var(--muted); margin: 0 0 20px; max-width: 65ch; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 0.9rem; margin: 0 0 16px; padding: 0; list-style: none; }
+  .legend li { display: flex; align-items: center; gap: 8px; }
+  .swatch { width: 14px; height: 14px; border: 1px solid var(--rule); border-radius: 2px; display: inline-block; }
+  .diagram { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; overflow-x: auto; }
+  .diagram pre.mermaid { margin: 0; min-width: 720px; }
+  figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 10px; max-width: 75ch; }
+  .notes { max-width: 70ch; padding-left: 1.2em; margin: 0; }
+  .notes li { margin-bottom: 6px; }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.9em; }
+  pre.source {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 14px 16px; overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+    font-size: 0.82rem; line-height: 1.45; margin: 0;
+  }
+  .hint { color: var(--muted); font-size: 0.9rem; margin: 8px 0 0; }
+</style>
+
+</head>
+<body>
+<main>
+  <h1>Emporia Amnesia Class Diagram</h1>
+  <p class="lede">The shared classes every group uses, and the classes the groups write themselves. Concrete locations and npcs are shown as generic placeholders.</p>
+
+  <ul class="legend">
+    <li><span class="swatch" style="background: var(--helper)"></span> Shared classes (given – changed only by the teacher)</li>
+    <li><span class="swatch" style="background: var(--student)"></span> Group-written classes</li>
+  </ul>
+
+  <figure class="diagram">
+<pre class="mermaid">
+classDiagram
+    direction TB
+
+    class IInteractable {
+        &lt;&lt;interface&gt;&gt;
+        +Interact(player)
+    }
+
+    class Direction {
+        &lt;&lt;enumeration&gt;&gt;
+        North
+        South
+        West
+        East
+        None
+    }
+
+    class Directions {
+        &lt;&lt;static&gt;&gt;
+        +Label(direction)$ string
+    }
+
+    class Game {
+        -isDev : bool
+        -isRunning : bool
+        -map : Map
+        -player : Player
+        -menu : Menu
+        +Start()
+        -PlayTurn()
+        -ChooseDirection()
+        -TryMovePlayer(rowMove, colMove)
+        -SearchLocation()
+        -TakeItem()
+        -Interact()
+    }
+
+    class Map {
+        +Locations$ : Location[][]
+        +GetLocation(row, col) Location
+        +PositionExists(row, col)$ bool
+        +DirectionsFor(row, col)$ Direction[]
+        +DirectionsFor(location)$ Direction[]
+    }
+
+    class Menu {
+        +Ask(heading, options) int
+    }
+
+    class Player {
+        +Row : int
+        +Col : int
+        +Backpack : Backpack
+        +GameOver : bool
+        +Teleport(className)
+    }
+
+    class Backpack {
+        +Items : List~Item~
+        +Add(item)
+        +Has(name) bool
+        +Remove(name) Item
+        +Print()
+    }
+
+    class Item {
+        +Name : string
+        +Description : string
+        +ToString() string
+    }
+
+    class Location {
+        +Name : string
+        +Description : string
+        +Directions : Direction[]
+        +Items : List~Item~
+        +Interact(player)
+    }
+
+    class Npc {
+        +Name : string
+        +Interact(player)
+    }
+
+    class LocationX {
+        -_npc : NpcA
+        -attempts : int
+        +Interact(player)
+    }
+
+    class LocationY {
+        +Interact(player)
+    }
+
+    class NpcA {
+        +SomeFlag : bool
+        +Interact(player)
+    }
+
+    IInteractable &lt;|.. Location : implements
+    IInteractable &lt;|.. Npc : implements
+    Location &lt;|-- LocationX
+    Location &lt;|-- LocationY
+    Npc &lt;|-- NpcA
+
+    Game *-- Map
+    Game *-- Player
+    Game *-- Menu
+    Player *-- Backpack
+    Backpack o-- Item : Items
+    Map "1" o-- "*" Location : Locations grid
+    Location o-- Item : Items lying here
+    Location ..&gt; Direction : Directions
+    Map ..&gt; Direction : DirectionsFor
+    Game ..&gt; Directions : Label() for the menu
+    Game ..&gt; Location : Interact(player)
+    Player ..&gt; Map : Teleport looks up Locations
+    LocationX *-- NpcA : owns, calls Interact(player)
+    LocationX ..&gt; Player : Teleport(), Backpack.Has()
+    LocationY ..&gt; Backpack : Add(item) / Remove(name)
+
+    style IInteractable fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Direction fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Directions fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Game fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Map fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Menu fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Player fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Backpack fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Item fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Location fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Npc fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style LocationX fill:#fbefd9,stroke:#b07a2a,color:#1f2428
+    style LocationY fill:#fbefd9,stroke:#b07a2a,color:#1f2428
+    style NpcA fill:#fbefd9,stroke:#b07a2a,color:#1f2428
+</pre>
+    <figcaption>Game runs the loop and the fixed verb menu; each turn it asks Map for the Location at the Player's row and column and prints it. "Interagera" calls location.Interact(player) – the Location's real class decides what happens, and a Location may hand over to an Npc it owns. Location and Npc are unrelated classes that both implement IInteractable. Exits are Direction values, filled in by Map from neighbouring cells unless the Location sets them itself.</figcaption>
+  </figure>
+
+  <h2>Reading the diagram</h2>
+  <ul class="notes">
+    <li><strong>Visibility:</strong> <code>+</code> public, <code>#</code> protected, <code>-</code> private. A trailing <code>$</code> marks a static member. Name and Description on Location, Npc and Item are public to read but <code>protected set</code> – only the class itself (or a subclass) assigns them, usually in the constructor.</li>
+    <li><strong>Hollow arrow</strong> is inheritance. <strong>Dashed hollow arrow</strong> is "implements interface". <strong>Dashed arrow</strong> is a dependency (one class calls the other). <strong>Filled diamond</strong> is ownership (Game creates its Map, Player and Menu; LocationX creates its NpcA). <strong>Hollow diamond</strong> is aggregation (Map holds the Locations, a Backpack holds Items).</li>
+    <li><strong>Composition vs inheritance:</strong> LocationX <em>has</em> an NpcA (composition) and <em>is</em> a Location (inheritance). NpcA <em>is</em> an Npc. Neither Location nor Npc inherits from the other – IInteractable is what they share.</li>
+    <li><strong>Enum and static:</strong> Direction is a fixed set of values; Directions.Label() is a static method that turns one into Swedish text for the menu. Map.Locations is a static field – there is one map – and Map's static constructor fills in every Location's exits once.</li>
+    <li><strong>Where state lives:</strong> the Player carries position, backpack and GameOver. Each Location and Npc keeps its own private fields (attempts, SomeFlag) – the room does not know how the bribe went, it asks the guard afterwards.</li>
+    <li><strong>Placeholders:</strong> LocationX, LocationY and NpcA stand for any concrete location or character. The shipped examples map them to OutsideDryCleaner / SecurityOffice, ToiletStall and Guard.</li>
+  </ul>
+
+  <h2>Mermaid source</h2>
+  <p class="hint">Paste into a <code>```mermaid</code> fence in a GitHub README, or into mermaid.live to export SVG or PNG.</p>
+  <pre class="source">classDiagram
+    direction TB
+
+    class IInteractable {
+        &lt;&lt;interface&gt;&gt;
+        +Interact(player)
+    }
+
+    class Direction {
+        &lt;&lt;enumeration&gt;&gt;
+        North
+        South
+        West
+        East
+        None
+    }
+
+    class Directions {
+        &lt;&lt;static&gt;&gt;
+        +Label(direction)$ string
+    }
+
+    class Game {
+        -isDev : bool
+        -isRunning : bool
+        -map : Map
+        -player : Player
+        -menu : Menu
+        +Start()
+        -PlayTurn()
+        -ChooseDirection()
+        -TryMovePlayer(rowMove, colMove)
+        -SearchLocation()
+        -TakeItem()
+        -Interact()
+    }
+
+    class Map {
+        +Locations$ : Location[][]
+        +GetLocation(row, col) Location
+        +PositionExists(row, col)$ bool
+        +DirectionsFor(row, col)$ Direction[]
+        +DirectionsFor(location)$ Direction[]
+    }
+
+    class Menu {
+        +Ask(heading, options) int
+    }
+
+    class Player {
+        +Row : int
+        +Col : int
+        +Backpack : Backpack
+        +GameOver : bool
+        +Teleport(className)
+    }
+
+    class Backpack {
+        +Items : List~Item~
+        +Add(item)
+        +Has(name) bool
+        +Remove(name) Item
+        +Print()
+    }
+
+    class Item {
+        +Name : string
+        +Description : string
+        +ToString() string
+    }
+
+    class Location {
+        +Name : string
+        +Description : string
+        +Directions : Direction[]
+        +Items : List~Item~
+        +Interact(player)
+    }
+
+    class Npc {
+        +Name : string
+        +Interact(player)
+    }
+
+    class LocationX {
+        -_npc : NpcA
+        -attempts : int
+        +Interact(player)
+    }
+
+    class LocationY {
+        +Interact(player)
+    }
+
+    class NpcA {
+        +SomeFlag : bool
+        +Interact(player)
+    }
+
+    IInteractable &lt;|.. Location : implements
+    IInteractable &lt;|.. Npc : implements
+    Location &lt;|-- LocationX
+    Location &lt;|-- LocationY
+    Npc &lt;|-- NpcA
+
+    Game *-- Map
+    Game *-- Player
+    Game *-- Menu
+    Player *-- Backpack
+    Backpack o-- Item : Items
+    Map "1" o-- "*" Location : Locations grid
+    Location o-- Item : Items lying here
+    Location ..&gt; Direction : Directions
+    Map ..&gt; Direction : DirectionsFor
+    Game ..&gt; Directions : Label() for the menu
+    Game ..&gt; Location : Interact(player)
+    Player ..&gt; Map : Teleport looks up Locations
+    LocationX *-- NpcA : owns, calls Interact(player)
+    LocationX ..&gt; Player : Teleport(), Backpack.Has()
+    LocationY ..&gt; Backpack : Add(item) / Remove(name)
+
+    style IInteractable fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Direction fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Directions fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Game fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Map fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Menu fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Player fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Backpack fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Item fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Location fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style Npc fill:#e8eef3,stroke:#2f6f8f,color:#1f2428
+    style LocationX fill:#fbefd9,stroke:#b07a2a,color:#1f2428
+    style LocationY fill:#fbefd9,stroke:#b07a2a,color:#1f2428
+    style NpcA fill:#fbefd9,stroke:#b07a2a,color:#1f2428</pre>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: "neutral" });
+</script>
+</body>
+</html>
