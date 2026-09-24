@@ -23,7 +23,6 @@ class Friend : Npc
                 friendInt = false;
                 continue;
             }
-            System.Console.WriteLine("");
             System.Console.WriteLine("Din vän ligger utslagen på golvet. ");
             if (talkToFriend == true)
             {
