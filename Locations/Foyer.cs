@@ -2,7 +2,7 @@ class Foyer : Location
 {
   private Cleaner _cleaner = new();
   private Friend _friend = new();
-  private bool _Money = false;
+  private bool _money = false;
 
   public Foyer()
   {
@@ -18,8 +18,11 @@ class Foyer : Location
     if (friend == true)
     {
       _friend.Interact(player);
-      Items.Add(new Item("pengar", "25.000kr!!"));
-      player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
+      if (!_money)
+      {
+        player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
+        _money = true;
+      }
     }
     else
     {
