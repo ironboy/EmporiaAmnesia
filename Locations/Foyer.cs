@@ -6,8 +6,8 @@ class Foyer : Location
 
   public Foyer()
   {
-    Name = "Foaje";
-    Description = "Där är en städare, hon kanske vet vad som hände igår?";
+    Name = "Foajé";
+    Description = "Jag kommer till en stor foajé.\nEn städerska går långsamt runt med sin städvagn och plockar undan skräp.\nNär hon får syn på mig så stannar hon upp och tittar på mig.\n\"Jasså, är du kvar här?\"";
   }
 
   public override void Interact(Player player)
