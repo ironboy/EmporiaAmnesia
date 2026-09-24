@@ -3,6 +3,9 @@ class Foyer : Location
   private Cleaner _cleaner = new();
   private Friend _friend = new();
   private bool _money = false;
+  bool cleaner = true;
+  bool friend = false;
+  int cleanerCount = 0;
 
   public Foyer()
   {
@@ -12,9 +15,11 @@ class Foyer : Location
 
   public override void Interact(Player player)
   {
-    bool cleaner = true;
-    bool friend = true;
-
+    if (cleanerCount > 2)
+    {
+      cleaner = false;
+      friend = true;
+    }
     if (friend == true)
     {
       _friend.Interact(player);
@@ -24,20 +29,17 @@ class Foyer : Location
         _money = true;
       }
     }
-    else
-    {
-      
-    }
+    
 
     if (cleaner == true)
     {
       _cleaner.Interact(player);
-    }
-    else
-    {
-      
+      cleanerCount++;
+
+
     }
 
-    
+
+
   }
 }
