@@ -1,5 +1,3 @@
-using System.Globalization;
-
 class TaxiDriver : Npc
 {
     public bool Taxiresa = false;
@@ -12,7 +10,7 @@ class TaxiDriver : Npc
     public override void Interact(Player player)
     {
         Menu taxiMenu = new Menu();
-        int adressen =taxiMenu.Ask("Hoppa in! Har du en adress du ska till? ",
+        int adressen = taxiMenu.Ask("Hoppa in! Har du en adress du ska till? ",
         ["Ja", "Nej"]);
 
         if (adressen == 2)
@@ -34,8 +32,20 @@ class TaxiDriver : Npc
             else 
             {
                 Console.WriteLine("\"Du saknar antigen adressen eller taxikor.\" ");
-                player.GameOver = true;
-            }
+            
+                int bönfall = taxiMenu.Ask("Snälla chauffören! min brud väntar på mig i någon kyrka i malmö. Kan du inte bara köra mig till närmaste kyrka...",
+                ["Böna och be", "Ge upp" ]);
+
+                if (bönfall == 1)
+                {
+                    Console.WriteLine("\"Ok! Grabben vi kör dig till brölpppet. Vart det nu än är? \"");
+                    Console.WriteLine("\"Hoppas vi hittar rätt kyrka.\"");
+                    Taxiresa = true;
+                }
+            
+            
+            }   
+        
         
         }
     
