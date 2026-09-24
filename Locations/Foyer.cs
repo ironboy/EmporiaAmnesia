@@ -30,16 +30,11 @@ class Foyer : Location
       }
     }
     
-
     if (cleaner == true)
     {
       _cleaner.Interact(player);
       cleanerCount++;
-
-
     }
-
-
 
   }
 }

@@ -18,7 +18,7 @@ class Friend : Npc
 
             if (count >= 2)
             {
-                System.Console.WriteLine("Din vän vägrar vakna. Du börjar rota i hans fickor. Du hittar en bunt med pengar, 25000kr, och lägger det i ryggsäcken.");
+                System.Console.WriteLine("Din vän vägrar vakna. Du börjar rota i hans fickor. Du hittar en bunt med pengar, 25000kr räknar du det till.");
 
                 friendInt = false;
                 continue;
@@ -34,13 +34,13 @@ class Friend : Npc
                 {
                     case 1:
                         System.Console.WriteLine("");
-                        System.Console.WriteLine("Ugghhhh..");
+                        System.Console.WriteLine("\"Ugghhhh..\"");
                         System.Console.WriteLine("");
                         count++;
                         break;
                     case 2:
                         System.Console.WriteLine("");
-                        System.Console.WriteLine("Sluta...");
+                        System.Console.WriteLine("\"Sluta...\"");
                         System.Console.WriteLine("");
                         count++;
                         break;
