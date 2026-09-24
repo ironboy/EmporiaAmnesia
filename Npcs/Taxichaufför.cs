@@ -20,21 +20,27 @@ class TaxiDriver : Npc
 
         // Taxichauffören kontrollerar om player har en adress
         int adress = taxiMenu.Ask("Hoppa in! Har du en adressen du ska till?",
-        ["Ja, jag har en adress", "Nej, jag har ingen adress"]);
+        ["Ja, jag har adressen", "Nej, jag har inte adressen"]);
 
         if (adress == 2 /*Nej, jag har ingen adress*/)
         {
             Console.WriteLine("\"Om du inta har någon adress! Så kan jag inte köra dig. ");
             Console.WriteLine("\"Men jag väntar till du hittar adressen");
+            player.GameOver = true;
         }
         else /*Ja, jag har en adress*/
         {
-            if (player)
+            if (player.Backpack.Has("adressen"))
+            {
+                player.Backpack.Remove("adressen");
+                Taxiresa = true;
+                Console.WriteLine("Taxichauffören startar bilem och kör. ");
+            }
+        
+        
         }
 
 
-    
-    
     
     }
 
