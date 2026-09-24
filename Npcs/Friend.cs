@@ -12,10 +12,10 @@ class Friend : Npc
     public override void Interact(Player player)
     {
         bool friendInt = true;
-        
+        Console.Clear();
         while (friendInt)
         {
-            Console.Clear();
+            
             if (count >= 2)
             {
                 System.Console.WriteLine("Din vän vägrar vakna. Du börjar rota i hans fickor. Du hittar en bunt med pengar, 25000kr");
