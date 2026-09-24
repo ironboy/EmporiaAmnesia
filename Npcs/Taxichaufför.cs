@@ -10,7 +10,7 @@ class TaxiDriver : Npc
     public override void Interact(Player player)
     {
 
-        if (player.Backpack.Has("adresslapp") && player.Backpack.Has("taxikort"))
+        if (player.Backpack.Has("adressen") && player.Backpack.Has("taxikort"))
         {
             Console.WriteLine("\"You are Good To Go.\"");
             return;
