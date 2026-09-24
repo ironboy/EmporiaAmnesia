@@ -64,17 +64,16 @@ class Guard : Npc
             }
 
         }
+        else if (choice == 2)
+        {
+            Console.WriteLine("Du försöker att attackera vakten, men du har ingen chans och han knockar dig");
+            player.GameOver = true;
+        }
         /*
-                else if (choice == 2)
-                {
-                    Console.WriteLine("Du försöker springa iväg, men vakten hinner ikapp");
-                    player.GameOver = true;
-                }
-
-                else if (choice == 3)
-                {
-
-                }
+        else if (choice == 3)
+        {
+            
+        }
         */
     }
 }
