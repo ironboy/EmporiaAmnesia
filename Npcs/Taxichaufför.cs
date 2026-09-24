@@ -9,7 +9,8 @@ class TaxiDriver : Npc
     
     public override void Interact(Player player)
     {
-        if (taxikort && adress)
+
+        if (player.Backpack.Has("adresslapp") && player.Backpack.Has("taxikort"))
         {
             Console.WriteLine("\"You are Good To Go.\"");
             return;
@@ -20,6 +21,9 @@ class TaxiDriver : Npc
         // Taxichauffören kontrollerar om player har en adress
         int adress = taxiMenu.Ask("Hoppa in har du en adressen du ska till?",
         ["Ja, jag har en adress", "Nej, jag har ingen adress"]);
+
+        if (Val == 1 /)
+
 
     
     
