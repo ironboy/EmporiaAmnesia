@@ -19,6 +19,7 @@ class Cleaner : Npc
     if (!_cleanerTalk)
     {
       Console.WriteLine("\n\"Jag såg att du kom in med en kompis här igårkväll.\"");
+      Console.WriteLine("\n\"Ni verkade ha en viktig tillställning som väntade er.\"");
       _cleanerTalk = true;
       return;
     }
