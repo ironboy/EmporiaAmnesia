@@ -41,24 +41,23 @@ class TaxiDriver : Npc
                     Console.WriteLine("\"Ok! Grabben vi kör dig till brölpppet. Vart det nu än är? \"");
                     Console.WriteLine("\"Hoppas vi hittar rätt kyrka.\"");
                     Taxiresa = true;
+                
+                    if (player.Backpack.Has("taxikort"))
+                    {
+                        player.Backpack.Remove("taxikort");
+                    }
+                
                 }
-            
+                else 
+                {
+                    Console.WriteLine("\"Utan adress kan tyvärr inte köra dig.\"");
+                }
             
             }   
         
-        
         }
     
-    
     }
-
-
-
-
-
-
-
-
 
 
 }
