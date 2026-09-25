@@ -11,20 +11,19 @@ class Janitor : Npc
     {
         if (Bribed)
         {
-            Console.WriteLine("\"Jag har inte sett dig. Gå nu.\"");
+            Console.WriteLine("\"Varsågod här har du nyckelkortet. Nu drar jag! \"");
             return;
         }
         Menu bribeMenu = new Menu();
         int chosen = bribeMenu.Ask(
-            "Om du har pengar skulle vi kunna prata om en lösning...",
+            "Jag hittade det här nyckelkortet i en soptunna på toaletten, är det något du är intresserad utav? ",
             ["Ja", "Nej"]
         );
         if (chosen == 2 /*Nej*/)
         {
             Console.WriteLine("\"Jaså inte det...\"");
-            Console.WriteLine("\"Du sitter här tills polisen kommer.\"");
-            player.GameOver = true;
-        }
+            Console.WriteLine("\"Då behöver jag din hjälp att städa korridoren . \"");
+                    }
         else /* Ja */
         {
             if (player.Backpack.Has("pengar"))
@@ -32,14 +31,9 @@ class Janitor : Npc
 
                 player.Backpack.Remove("pengar");
                 Bribed = true;
-                Console.WriteLine("Vakten stoppar på sig bunten. \"Vilket larm?\"");
+                Console.WriteLine("Vaktmästaren tar emot pengarna. \"Nu går jag! \"");
             }
-            else
-            {
-                Console.WriteLine("\"Du ljuger - jag har muddrat dig. Inga pengar!");
-                Console.WriteLine("\"Du sitter här tills Vakten kommer.\"");
-                player.GameOver = true;
-            }
+
         }
 
     }
