@@ -4,7 +4,8 @@ public BackRoom()
   {
     Name = "Bakrummet";
     Description = "Jag har kommit in i det lilla rummet bakom kemtvätten. Det är saker överallt. En hög med kläder, en tvättkorg, en liten skål med mynt, knappar och andra småsaker. ";
-    
+    Items.Add(new Item("Smutstvätt", "Kanske något som passar till kostymen?."));
+    Items.Add(new Item("En påse med jordnötsringar", "Kan funka som vigselring i nödfall? ."));
   }
 
   public override void Interact(Player player)
