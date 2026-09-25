@@ -15,7 +15,7 @@ class TaxiDriver : Npc
         int adressen = taxiMenu.Ask("Hoppa in! Har du en adress du ska till? ",
         ["Ja", "Nej"]);
 
-        // 1. vilkor som spelaren får välja antegen Ja eller Nej
+        // 1. vilkor som spelaren får välja antingen Ja eller Nej
         if (adressen == 2)
         {
             // playern väljer Nej och Taxichauffören svarar
@@ -35,14 +35,14 @@ class TaxiDriver : Npc
        
         }
         //3. Här kontrollerar vi om vilkorna uppfylls    
-        else if (player.Backpack.Has("adressen") && !player.Backpack.Has("taxikort"))
+        else if (player.Backpack.Has("adressen"))
         {
             // Spelaren har adressen men ingen taxikort. Taxiresan 
             Console.WriteLine("\"Sorry grabben! Du saknar taxikortet! Kan tyvärr inte köra dig..\"");
             player.GameOver = true;
         }
         // Spelaren har inte adressen men har taxikort
-        else if (!player.Backpack.Has("adressen") && player.Backpack.Has("taxikort"))
+        else if (player.Backpack.Has("taxikort"))
         {
            // här har vi lite drama som uspelar sig.
            int bönfall = taxiMenu.Ask("Snälla chauffören! Jag ska gifta mig och min brud väntar på mig i någon kyrka i malmö. Kan du inte bara köra mig till närmaste 10 kyrkor...",
