@@ -30,6 +30,12 @@ public BackRoom()
         }
         else if (chosenPlace == "3")
         {
+            Console.WriteLine(@"
+  ___  
+ /   \ 
+|     |
+ \___/ 
+");
             Console.WriteLine("Åh en sån lättnad! Här är min ring!!");
             player.Backpack.Add(new Item("Ring", "Vigselringen till bröllopet"));
             foundRing = true;
