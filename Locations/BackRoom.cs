@@ -16,7 +16,7 @@ public BackRoom()
         while (!foundRing) 
         {
 
-        Console.Write("Var vill du leta? 1. Under klädhögen, 2. I tvättkorgen, 3. I skålen: ");
+        Console.Write("Var vill du leta? 1. Under klädhögen, 2. I tvättkorgen, 3. I skålen \n4. Strunta att leta efter vigselringen och ta en av jordnötsringarna i påsen på bordet istället ");
         string? chosenPlace = Console.ReadLine();
 
         if (chosenPlace == "1")
@@ -44,6 +44,12 @@ public BackRoom()
         {
         }
         }
+        else if (chosenPlace == "4")
+            {
+                player.Backpack.Add(new Item("Jordnötsring", "Ring som ring?"));
+                Console.WriteLine("Hoppas den passar!");
+                break;
+            }
         }
     }
 }       
