@@ -11,23 +11,39 @@ class DryCleanerNPC : Npc
     public override void Interact(Player player)
     {
         // Kvitto har lagts tillfälligt i ryggsäcken för att kunna testa. Ska egentligen hittas av grupp 1
-      player.Backpack.Add(new Item("kemtvättskvitto", "Kemtvättskvitto"));
+      if (!player.Backpack.Has("kemtvättskvitto"))
+{
+    player.Backpack.Add(new Item("kemtvättskvitto", "Kemtvättskvitto"));
+}
        
         if (hasGivenCostume == false)
         {
-            Console.WriteLine("Kemtvättaren: Har du ditt kvitto med dig?");
-            if (player.Backpack.Has("kemtvättskvitto"))
-            {
-                Console.WriteLine("Kemtvättaren: Ah! Du har kvittot. Här är din kostym.");
+            Console.Write("Kemtvättaren: Har du ditt kvitto med dig? Ja / Nej: ");
+        string? answer = Console.ReadLine();
+
+        if (answer == "Ja" && player.Backpack.Has("kemtvättskvitto"))
+        {
+             Console.WriteLine("Kemtvättaren: Ah! Du har kvittot. Här är din kostym.");
                 player.Backpack.Remove("kemtvättskvitto");
                 player.Backpack.Add(new Item("kostym","Min bröllopskostym!"));
                 
                 hasGivenCostume = true;
                 Console.WriteLine("Du känner igenom fickorna på kostymen... RINGEN ÄR BORTA!");
-            }
-            else
+            
+        }
+       else if (answer == "Nej" && !player.Backpack.Has("kemtvättskvitto"))
+        {
+            Console.WriteLine("Du måste ha kemtvättskvitto med dig för att få din kostym");
+            
+        }
+    
+        else if (answer == "Nej" & player.Backpack.Has("kemtvättskvitto"))
             {
-                Console.WriteLine("Kemtvättaren:: Du måste ha kemtvättskvitto med dig för att få din kostym");
+               Console.WriteLine("Har du kollat i väskan?");
+            }
+           else if (answer == "Ja" && !player.Backpack.Has("kemtvättskvitto"))
+            {
+                Console.WriteLine("Du säger att du har det men jag ser inget kvitto! Jag kan inte ge dig någon kostym");
                 
             }
             
