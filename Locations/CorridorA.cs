@@ -26,7 +26,7 @@ class CorridorA : Location
         // then the room can start an interaction with an NPC
         _janitor.Interact(player);
         // Allow to leave if guard is bribed
-        if (_janitor.Bribed)
+        if (_janitor.Bribed || _janitor.Helped)
         {
             Directions = Map.DirectionsFor(this);
             Description = "Åt norr ser jag rulltrappan upp till taket, åt väster ser jag rulltrappan ner till foajén, åt söder ser jag utgången till kemtvätten.";

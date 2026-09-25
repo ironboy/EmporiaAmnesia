@@ -4,5 +4,6 @@ class Escalator1 : Location
     {
         Name = "Övre rulltrappan";
         Description = "Jag ser en korridor söderut och taket österut.";
+        Directions = [Direction.South, Direction.East];
     }
 }

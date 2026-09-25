@@ -1,8 +1,8 @@
 class Janitor : Npc
 {
-    public bool Bribed = false;
-    public bool Helped = false;
-    public bool KeycardGiven = false;
+    public bool Bribed { get; private set; } = false;
+    public bool Helped { get; private set; } = false;
+    public bool KeycardGiven { get; private set; } = false;
 
     public Janitor()
     {
@@ -67,7 +67,8 @@ class Janitor : Npc
 
             if (helpChoice == 1)
             {
-                Console.WriteLine("Du städar korridoren för vaktmästaren.");
+                Console.Write("Du städar korridoren för vaktmästaren.");
+                Wait.Waiting(5000, 1000, WaitAnimationType.Dots, true);
                 Helped = true;
                 GiveKeycard(player);
             }
@@ -91,9 +92,8 @@ class Janitor : Npc
             return;
         }
 
+        Console.WriteLine("Vaktmästaren ger dig nyckelkortet. \"Nu drar jag!\"");
         player.Backpack.Add(new Keycard());
         KeycardGiven = true;
-
-        Console.WriteLine("Vaktmästaren ger dig nyckelkortet. \"Nu drar jag!\"");
     }
 }
