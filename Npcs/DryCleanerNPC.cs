@@ -6,8 +6,13 @@ class DryCleanerNPC : Npc
     {
         Name= "Kemtvättaren";
     }
+
+    
     public override void Interact(Player player)
     {
+        // Kvitto har lagts tillfälligt i ryggsäcken för att kunna testa. Ska egentligen hittas av grupp 1
+      player.Backpack.Add(new Item("kemtvättskvitto", "Kemtvättskvitto"));
+       
         if (hasGivenCostume == false)
         {
             Console.WriteLine("Kemtvättaren: Har du ditt kvitto med dig?");
@@ -22,7 +27,7 @@ class DryCleanerNPC : Npc
             }
             else
             {
-                Console.WriteLine("Kemtvättaren:: Du måste har kemtvättskvitto med dig för att få din kostym");
+                Console.WriteLine("Kemtvättaren:: Du måste ha kemtvättskvitto med dig för att få din kostym");
                 
             }
             
@@ -30,7 +35,7 @@ class DryCleanerNPC : Npc
         }
         else if (hasGivenCostume==true && invitedToWedding==false)
             {
-                Console.WriteLine("Du: Min ring måste har trillat ur nångonstans, den är inte i fikan.");
+                Console.WriteLine("Du: Min ring måste ha trillat ur nångonstans, den är inte i fikan.");
                 Console.WriteLine("Kemtvättaren: Det kan vara så att den trillade ur under tvätten i Bakrummet.");
                 Console.WriteLine("Du: Kan jag gå in och leta efter den?");
                 Console.WriteLine("Kemtvättaren: Absolut inte!!");

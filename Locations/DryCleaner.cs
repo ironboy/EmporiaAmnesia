@@ -3,13 +3,13 @@ class DryCleaner : Location
  public DryCleaner()
   {
     Name = "Kemtvätt";
-    Description = "Jag står inne på kemtvätten. I handen har jag kvittot för att hämta ut min kostym";
-    //Ska spelaren interagera med den anställde i kemtvätten för att få sin kostym, eller sker det direkt i Description?
+    Description = "Jag står inne på kemtvätten. Bakom disken står en anställd och fixar med nytvättad tvätt. Han jobbar tydligen natt. Skönt, då kan jag få min kostym!";
+    
     // Spelaren ska bjuda in Kemtvättaren till sin brölopp
     // Kemtvättaren låter han tar ringen.
   }
 
-//Sker det någon Interact här med rummet, eller bara med personalen i klassen npcs DryCleaner?
+
     private DryCleanerNPC _drycleanerNPC = new();
     public override void Interact(Player player)
     {
