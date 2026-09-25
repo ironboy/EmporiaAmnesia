@@ -57,7 +57,7 @@ class DryCleanerNPC : Npc
         // Steg 2: Spelaren har kostymen, upptäcker att ringen är borta och mutar kemtvättaren.
         else if (hasGivenCostume==true && invitedToWedding==false)
             {
-                Console.WriteLine("Du: Min ring måste ha trillat ur nångonstans, den är inte i fikan.");
+                Console.WriteLine("Du: Min ring måste ha trillat ur nångonstans, den är inte i fickan.");
                 Console.WriteLine("Kemtvättaren: Det kan vara så att den trillade ur under tvätten i Bakrummet.");
                 Console.WriteLine("Du: Kan jag gå in och leta efter den?");
                 Console.WriteLine("Kemtvättaren: Absolut inte!!");

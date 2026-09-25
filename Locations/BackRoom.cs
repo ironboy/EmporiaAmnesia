@@ -5,9 +5,9 @@ public BackRoom()
     Name = "Bakrummet";
     Description = "Jag har kommit in i det lilla rummet bakom kemtvätten. Det är saker överallt. En hög med kläder, en tvättkorg, en liten skål med mynt, knappar och andra småsaker. ";
     
-    // Lägger till föremål som spelaren kan undersöka och ta med sig
-    Items.Add(new Item("Smutstvätt", "Kanske något som passar till kostymen?."));
-    Items.Add(new Item("En påse med jordnötsringar", "Kan funka som vigselring i nödfall? ."));
+    // Lägger till föremål som spelaren kan undersöka
+    Items.Add(new Item("smutstvätt", "Kanske något som passar till kostymen?."));
+    Items.Add(new Item("jordnötsringar", "Kan funka som vigselring i nödfall? ."));
   }
 
   public override void Interact(Player player)
@@ -43,9 +43,9 @@ public BackRoom()
 |     |
  \___/ 
 ");
-            // Måste stavas med litet "r" enligt uppgiften.
+           
             Console.WriteLine("Åh en sån lättnad! Här är min ring!!");
-            player.Backpack.Add(new Item("Ring", "Vigselringen till bröllopet"));
+            player.Backpack.Add(new Item("ring", "Vigselringen till bröllopet"));
             foundRing = true; // Detta gör att loopen avslutas.
         
         
@@ -54,7 +54,7 @@ public BackRoom()
         // Spelaren ger upp och tar en jordnötsring.
         else if (chosenPlace == "4")
             {
-                player.Backpack.Add(new Item("Jordnötsring", "Ring som ring?"));
+                player.Backpack.Add(new Item("jordnötsring", "Ring som ring?"));
                 Console.WriteLine("Hoppas den passar!");
                 break; // "break" avbryter loopen direkt, även om foundRing är false.
             }
