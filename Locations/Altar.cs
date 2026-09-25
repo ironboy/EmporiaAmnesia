@@ -38,10 +38,5 @@ class Altar : Location
         _ex.Interact(player);
         _partner.Interact(player);
 
-        Console.WriteLine("Prästen tittar på partnern.");
-        Console.WriteLine("\"Då måste du bevisa att ni är skilda.\"");
-
-        Console.WriteLine("Du erbjuder dig att hämta skilsmässobeviset.");
-        Console.WriteLine("\"Jag hämtar skilsmässobeviset!\"");
     }
 }

@@ -16,7 +16,7 @@ class Partner : Npc
             "Vad gör du?",
             [
                 "Jag hämtar skilsmässobeviset.",
-                "Jag erkänner att påståendet stämmer."
+                "Jag hämtar INTE skilsmässobeviset."
             ]
         );
 
@@ -33,7 +33,7 @@ class Partner : Npc
         else
         {
             Console.WriteLine(
-                "\"Hon har rätt. Vi är fortfarande gifta...\""
+                "GAME OVER!"
             );
 
             player.GameOver = true;
