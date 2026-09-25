@@ -8,7 +8,7 @@ class Janitor : Npc
     {
         Name = "Vaktmästare";
     }
-    
+
 
     public override void Interact(Player player)
     {
@@ -20,7 +20,7 @@ class Janitor : Npc
 
         if (player.Backpack.Has("keycard"))
         {
-            Console.WriteLine("Vaktmästaren säger att han redan gett dig nyckelkortet. ");
+            Console.WriteLine("Du har redan nyckelkortet.");
             return;
         }
 
@@ -32,8 +32,8 @@ class Janitor : Npc
 
         Menu bribeMenuJanitor = new Menu();
         int chosen = bribeMenuJanitor.Ask(
-            "Jag hittade det här nyckelkortet i en soptunna på toaletten, är det något du är intresserad utav? \n Det kommer kosta dig en slant. ",
-            new[] { "Ja", "Nej" }
+            "Vaktmästaren: Jag hittade det här nyckelkortet i en soptunna på toaletten, är det något du är intresserad utav? \n Det kommer kosta dig en slant. ",
+            ["Ja", "Nej"]
         );
 
         // Om din Ask-metod returnerar 1-indexerat svar:
@@ -62,7 +62,7 @@ class Janitor : Npc
             Menu helpMenuJanitor = new Menu();
             int helpChoice = helpMenuJanitor.Ask(
                 "Vill du hjälpa till och städa korridoren?",
-                new[] { "Ja", "Nej" }
+                ["Ja", "Nej"]
             );
 
             if (helpChoice == 1)

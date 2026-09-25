@@ -8,15 +8,15 @@ class CorridorA : Location
 
 
 
-     // A common convention when naming private fields
+    // A common convention when naming private fields
     // is naming with and underscore followed but a small letter
-    // This makes simple to distinguish from public fields that 
+    // This makes simple to distinguish from public fields that
     // you start a capital
     private Janitor _janitor = new();
     public CorridorA()
     {
-        Name = "Korridor A";
-        Description = "Du är på Korridor A";
+        Name = "Övre korridoren";
+        Description = "Här finns en vaktmästare som vill ha din uppmärksamhet.";
         Directions = [Direction.None];
     }
 
@@ -29,6 +29,7 @@ class CorridorA : Location
         if (_janitor.Bribed)
         {
             Directions = Map.DirectionsFor(this);
+            Description = "Åt norr ser jag rulltrappan upp till taket, åt väster ser jag rulltrappan ner till foajén, åt söder ser jag utgången till kemtvätten.";
         }
     }
 }

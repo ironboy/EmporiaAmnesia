@@ -3,6 +3,6 @@ class Escalator2 : Location
   public Escalator2()
   {
     Name = "Rulltrappa";
-    Description = "Jag ser marmorväggar västerut nedanför mig, och en korridor österut ovanför mig";
+    Description = "Jag ser en foajé västerut och en korridor österut.";
   }
 }
