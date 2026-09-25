@@ -1,7 +1,5 @@
 class TaxiDriver : Npc
 {
-    public bool Taxiresa = false;
-
     public TaxiDriver()
     {
         Name = "Taxichaufför";
@@ -29,63 +27,24 @@ class TaxiDriver : Npc
             // Spelaren har både taxikort och adressen. Resan blir möjligt
             player.Backpack.Remove("adressen");
             player.Backpack.Remove("taxikort");
-            Taxiresa = true;
-            Console.WriteLine("\"You are Good To Go.\"");
+            
+            // Spelaren får tumen upp! och får åka taxi
+            Console.WriteLine("\"Bra! du har allt med dig, då kör vi till bröloppet.\"");
+            
+            // Spelaren förflyttas till bröloppet!
+            player.Row = 3;
+            player.Col = 5;
+
             return;
-       
+
         }
-        //3. Här kontrollerar vi om vilkorna uppfylls    
-        else if (player.Backpack.Has("adressen"))
+        else
         {
-            // Spelaren har adressen men ingen taxikort. Taxiresan 
-            Console.WriteLine("\"Sorry grabben! Du saknar taxikortet! Kan tyvärr inte köra dig..\"");
+            // Uppfyller du inte vilkopren så är spelet slut!
+            Console.WriteLine("\"Du måste ha både adressen och taxikortet för att åka vidare ");
             player.GameOver = true;
         }
-        // Spelaren har inte adressen men har taxikort
-        else if (player.Backpack.Has("taxikort"))
-        {
-           // här har vi lite drama som uspelar sig.
-           int bönfall = taxiMenu.Ask("Snälla chauffören! Jag ska gifta mig och min brud väntar på mig i någon kyrka i malmö. Kan du inte bara köra mig till närmaste 10 kyrkor...",
-           ["Böna och be", "Ge upp" ]);
-            
-            if (bönfall == 1)
-            {
-                // Spelarne väljer vilkor böna och be!! + att vi har lite drama igen. Taxiresan blir av.
-                Console.WriteLine("\"Ok! Grabben! Du har övertalat mig. Vi försöker hitta ditt bröllopp. Vart det nu än är? \"");
-                Console.WriteLine("\"Hoppas vi hittar rätt kyrka.\"");
-                Taxiresa = true;
-
-                // Spelaren har taxikort men ingen adress
-                player.Backpack.Remove("taxikort");
-            }
-            else if (bönfall == 2)
-            {
-
-                Console.WriteLine("\"Detta var den sista kyrka vi körde till! Tyvärr du får gifta dig en annan dag.\"");
-                player.GameOver = true;
-            }
-            
-        } 
-        else 
-        {
-            // Spelaren har tom ryggsäck ingen adress eller taxikort. "Hejdå hejdå"
-            Console.WriteLine("\"Du har varken adressen eller taxikort.\"");
-            player.GameOver = true;
-        }         
-    }
-
-}       
-
-
-      
-    
-
-
-      
-              
         
-        
-    
-    
+    }   
 
-
+}
