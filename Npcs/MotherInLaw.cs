@@ -1,31 +1,24 @@
-using System;
-namespace EmporiaAmnesia.Npcs;
-    class MotherInLaw : Npc
+class MotherInLaw : Npc
+{
+    public MotherInLaw()
     {
-        public MotherInLaw()
+        Name = "Din blivande svärmor";
+    }
+    public override void Interact(Player player)
+    {
+        Console.WriteLine("\n Svärmor ");
+        //Check if the plyaer already recived the wedding address
+        if (player.Backpack.Has("adressen"))
         {
-            // Set the NPC name
-            Name = "Svärmor";
+            Console.WriteLine("\"Vad väntar du på?! Skynda dig till taxin!\"");
         }
-        public override void Interact(Player player)
+        else
         {
-            Console.WriteLine("\n--- Svärmor ---");
-            // Check if the player already recived the church address
+            Console.WriteLine("\"Var i hela friden har du varit?! Jag har letat efter dig överallt!\"");
+            Console.WriteLine("\"Bröllopet börjar snart! Här är adressen, skynda dig!\"");
 
-            if (player.Backpack.Has("adressen"))
-            {
-                Console.WriteLine("\"Vad väntar du på?! Skynda dig ner till taxin!\"");
-            }
-            else
-            {
-                Console.WriteLine("\"Var i hela friden har du varit?! Varken du eller ringen syntes till!\"");
-                Console.WriteLine("\"Bröllopet börjar strax! Här är adressen till kyrkan, ta en taxi nu!\"");
-                // Give the address item to the player's backpack
-
-                player.Backpack.Add(new Item("adressen","Adressen till kyrkandär bröllopet hålls."));
-                Console.WriteLine("\n(Du fick 'adressen'och lade den i ryggsäcken)");
-            }
-
+            //Giv the addresss item to the player's
+            player.Backpack.Add(new Item("adressen", "Adressen till platsen där bröllopet hålls."));
         }
-    }    
-  
+    }
+}
