@@ -12,10 +12,8 @@ class DryCleanerNPC : Npc
     public override void Interact(Player player)
     {
         // Kvitto har lagts tillfälligt i ryggsäcken för att kunna testa. Ska egentligen hittas av grupp 1
-      if (!player.Backpack.Has("kemtvättskvitto"))
-{
     player.Backpack.Add(new Item("kemtvättskvitto", "Kemtvättskvitto"));
-}
+
        // Steg 1: Om spelaren inte har fått kostymen än.
         if (hasGivenCostume == false)
         {
@@ -57,14 +55,45 @@ class DryCleanerNPC : Npc
         // Steg 2: Spelaren har kostymen, upptäcker att ringen är borta och mutar kemtvättaren.
         else if (hasGivenCostume==true && invitedToWedding==false)
             {
-                Console.WriteLine("Du: Min ring måste ha trillat ur nångonstans, den är inte i fickan.");
+                Console.WriteLine("Min ring måste ha trillat ur nångonstans, den är inte i fickan. (Tryck på tangent för att fortsätta)");
+                Console.ReadKey();
                 Console.WriteLine("Kemtvättaren: Det kan vara så att den trillade ur under tvätten i Bakrummet.");
-                Console.WriteLine("Du: Kan jag gå in och leta efter den?");
+                Console.ReadKey();
+                Console.WriteLine("Kan jag gå in och leta efter den?");
+                Console.ReadKey();
                 Console.WriteLine("Kemtvättaren: Absolut inte!!");
+                Console.ReadKey();
+
+                bool convincedHim = false;
+
+                 while (!convincedHim)  //Snurrar tills man hittat sätt att få honom att släppa en in i bakrummet
+                 {
+
+                Console.Write("Vad vill du göra för att få honom att ändra sig? 1. Erbjuda dig att ta hans nästa nattpass eller 2. Bjuda honom till bröllopet? ");
+                string? answer = Console.ReadLine();
+
+                 if (answer == "1") //Fel svar
+        {
+             Console.WriteLine("Kom igen! Jag tar ditt nästa nattpass om jag får gå in!!");
+             Console.ReadKey();
+            Console.WriteLine("Kemtvättaren: Skulle inte tro det! Du ser inte ut att kunna klara mina avancerade arbetsuppgifter");
+            
+            
+        }
+                if (answer == "2") //Rätt svar som leder till att man blir insläppt
+                {
+
                 Console.WriteLine("Du: Snälla! Jag bjuder in dig till bröllopet, fri bar");
+                Console.ReadKey();
                 Console.WriteLine("Kemtvättaren: ...Okej då. Gå in snabbt innan jag ångrar mig.");
-                invitedToWedding = true;
-                player.Teleport("BackRoom");
+                convincedHim = true;
+
+                }
+            }
+                
+                invitedToWedding = true;          
+                player.Teleport("BackRoom");  //Man förflyttas till bakrummet
+                
             }
 
     }
