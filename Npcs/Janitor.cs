@@ -1,3 +1,6 @@
+/// <summary>
+/// Used by CorridorA to give the user a keycard that is needed elsewhere.
+/// </summary>
 class Janitor : Npc
 {
     public bool Bribed { get; private set; } = false;
@@ -12,18 +15,21 @@ class Janitor : Npc
 
     public override void Interact(Player player)
     {
+        // If you've been given the keycard once, you can't get it again if you lost it.
         if (KeycardGiven)
         {
             Console.WriteLine("Vaktmästaren har redan gett dig nyckelkortet.");
             return;
         }
 
+        // If you already have the keycard, you're done here. Move on.
         if (player.Backpack.Has("keycard"))
         {
             Console.WriteLine("Du har redan nyckelkortet.");
             return;
         }
 
+        // You've earned the keycard. There you go.
         if (Bribed || Helped)
         {
             GiveKeycard(player);
@@ -57,7 +63,7 @@ class Janitor : Npc
         else
         {
             Console.WriteLine("\"Jaså inte det...\"");
-            Console.WriteLine("\"Då behöver jag din hjälp att städa korridoren.\"");
+            Console.WriteLine("\"Om du ändå vill ha nyckelkortet så behöver jag din hjälp att städa korridoren.\"");
 
             Menu helpMenuJanitor = new Menu();
             int helpChoice = helpMenuJanitor.Ask(
@@ -68,7 +74,8 @@ class Janitor : Npc
             if (helpChoice == 1)
             {
                 Console.Write("Du städar korridoren för vaktmästaren.");
-                Wait.Waiting(5000, 1000, WaitAnimationType.Dots, true);
+                Wait.Waiting(10000, 1000, WaitAnimationType.Dots, true);
+                Console.WriteLine("Nu är korridoren skinande ren, bra jobbat.");
                 Helped = true;
                 GiveKeycard(player);
             }

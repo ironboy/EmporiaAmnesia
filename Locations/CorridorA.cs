@@ -1,13 +1,5 @@
 class CorridorA : Location
 {
-    /*public CorridorA()
-    {
-        Name = "En lång ödslig korridor";
-        Description = "Åt norr ser jag rulltrappan up till taket, åt väster ser jag rulltrappan ner till foajén, åt söder ser utgången till kemtvätten";
-    }*/
-
-
-
     // A common convention when naming private fields
     // is naming with and underscore followed but a small letter
     // This makes simple to distinguish from public fields that
