@@ -66,9 +66,9 @@ class SurveillanceRoom : Location
         switch (camera)
         {
             case Camera.DryCleaner: return "Kamera 1: Kemtvätten, 18:30";
-            case Camera.Entrance: return "Kamera 2: Entrén, 19:40";
-            case Camera.Escalator: return "Kamera 3: Rulltrappan, 19:45";
-            case Camera.Toilets: return "Kamera 4: Toaletterna, 19:55";
+            case Camera.Entrance: return "Kamera 2: Entrén, 19:47";
+            case Camera.Escalator: return "Kamera 3: Rulltrappan, 19:55";
+            case Camera.Toilets: return "Kamera 4: Toaletterna, 19:58";
             case Camera.Entrance2: return "Kamera 2: Entrén, 19:59"; //Filmer med "2" i namnet visar vad som hände senare på samma plats.
             case Camera.Toilets2: return "Kamera 4: Toaletterna, 01:16";
             default: return camera.ToString();
@@ -81,28 +81,30 @@ private void Play(Camera camera)
         switch (camera)
         {
             case Camera.DryCleaner:
-                Console.WriteLine("Du står vid disken och lämnar in en kostym. Rödvin över hela kavajen.");
-                Console.WriteLine("Du pekar på klockan och håller upp ett finger: Du ska hämta den om 1 timme. Kemtvättaren nickar.");
+                Console.WriteLine("Du står vid disken. Din vän i fluga skrattar medan du lämnar in en kostym täckt i rödvin.");
+                Console.WriteLine("Vännen betalar för expresstvätt, tar emot kvittot och stoppar ner det i sin ryggsäck.");
+                Console.WriteLine("Du pekar på klockan och håller upp ett finger: Ni ska hämta den om 1 timme. Kemtvättaren nickar stressat.");
                 break;
             case Camera.Entrance:
-                Console.WriteLine("Dörrarna glider upp. In kommer du, arm i arm med en man i fluga.");
-                Console.WriteLine("Ni ser fulla ut och du bär en spritflaska...");
+                Console.WriteLine("Dörrarna glider upp. Du och mannen i fluga stapplar in igen.");
+                Console.WriteLine("Ni är uppenbart berusade. Han bär ryggsäcken, och du dricker ur en spritflaska...");
                 break;
             case Camera.Escalator:
-                Console.WriteLine("Du försöker gå uppför rulltrappan åt fel håll. Mannen i fluga drar ner dig skrattandes.");
-                Console.WriteLine("Han tar fram en bunt sedlar, pekar på dig och säger något.");
-                Console.WriteLine("Du ler brett och ger honom en kram. Han går tillbaka mot entren efter att ha pekat dig i riktningen mot rätt rulltrappa.");
+                Console.WriteLine("Ni står vid rulltrapporna när ni får syn på en säkerhetsvakt. Mannen i fluga kollar på sin klocka, verkar få panik.");
+                Console.WriteLine("Han tar av sig ryggsäcken, stoppar ner en tjock sedelbunt i den och hänger den på din rygg.");
+                Console.WriteLine("Han pekar upp mot kemtvätten, ger dig en snabb kram och springer sedan skrikandes åt andra hållet för att avleda vakten.");
                 break;
             case Camera.Toilets:
-                Console.WriteLine("Du springer in i toalettbåsen med handen över munnen.");
-                Console.WriteLine("Du snubblar en gång men går snabbt upp och öppnar toalettbåsens dörr hastigt.");
+                Console.WriteLine("Du är på väg mot kemtvätten, men stannar plötsligt. Spriten har slagit till på riktigt.");
+                Console.WriteLine("Du slår handen över munnen, ser grön ut i ansiktet och springer snublandes med ryggsäcken på ryggen in på toaletterna.");
                 break;
                 case Camera.Entrance2:
-                Console.WriteLine("Mannen i flugan blir mött av en säkerhetsvakt vid entren.");
-                Console.WriteLine("Säkerhetsvakten pekar på sin klocka medan han eskorterar ut mannen i flugan.");
+                Console.WriteLine("Mannen i fluga har blivit fångad av säkerhetsvakten vid entrén.");
+                Console.WriteLine("Vakten pekar argt på sin klocka och kastarut din vän genom dörrarna.");
                 break;
             case Camera.Toilets2:
-                Console.WriteLine("Du ser dig själv komma ut långsamt, vinglandes och förrvirrad över hur du hamnade där.");                
+                Console.WriteLine("Emporia är nu nedsläckt och låst.");
+                Console.WriteLine("Du ser dig själv komma ut långsamt, vinglandes och förrvirrad över hur du hamnade där.");
                 break;
         }
     }
@@ -111,7 +113,11 @@ private void Play(Camera camera)
 // När alla filmer har setts, flöder vårt minne tillbaka.
     private void Remember()
     {
-        Console.WriteLine("\nBilderna faller på plats. Mannen i fluga är din bästa vän och best man.");
-        Console.WriteLine("Ni var på svensexan. Pengarna var hans present: Till smekmånaden.");
+        Console.WriteLine("\nBilderna faller på plats. Mannen i fluga är din bästa vän och best man.");        
+        Console.WriteLine("Han råkade spilla rödvin på din kostym under svensexan, så ni åkte till Emporia för att paniktvätta den.");
+        Console.WriteLine("Pengarna i ryggsäcken är dina vänners present till bröllopsresan.");
+        Console.WriteLine("När vakten skulle kasta ut er vid stängning offrade han sig så att du skulle hinna hämta kostymen...");
+        Console.WriteLine("...men istället däckade du på toaletten. Med hans ryggsäck, kvittot och alla pengarna.");
+        Console.WriteLine("\nBröllopet är idag. Och du måste ut härifrån.");
     }
 }
