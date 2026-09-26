@@ -4,6 +4,7 @@ class Altar : Location
     // These exact item names are the contract with the groups that provide the items.
     private const string CostumeItem = "kostym";
     private const string RingItem = "ring";
+    private const string BorrowedRingDescription = "En ring som familjen lånar ut under vigseln.";
 
     // The altar decides which NPC is interacted with and in what order.
     private Priest _priest = new();
@@ -25,13 +26,6 @@ class Altar : Location
         bool hasCostume = player.Backpack.Has(CostumeItem);
         bool hasRing = player.Backpack.Has(RingItem);
 
-        if (!hasCostume && !hasRing)
-        {
-            Console.WriteLine("Prästen tittar på dig.");
-            Console.WriteLine("\"Du saknar både kostym och ring.\"");
-            return;
-        }
-
         if (!hasCostume)
         {
             Console.WriteLine("Prästen tittar på dig.");
@@ -41,9 +35,22 @@ class Altar : Location
 
         if (!hasRing)
         {
-            Console.WriteLine("Prästen tittar på dig.");
-            Console.WriteLine("\"Du saknar en ring.\"");
-            return;
+            int choice = new Menu().Ask(
+                "Du saknar en ring. En familjemedlem erbjuder sig att låna ut sin ring.",
+                [
+                    "Jag lånar ringen.",
+                    "Jag avstår från ringen."
+                ]
+            );
+
+            if (choice == 2)
+            {
+                Console.WriteLine("Du kan inte gifta dig utan en ring.");
+                return;
+            }
+
+            player.Backpack.Add(new Item(RingItem, BorrowedRingDescription));
+            Console.WriteLine("Du lånar familjens ring inför vigseln.");
         }
 
         // Checking if the drama has happened
