@@ -21,6 +21,7 @@ class Altar : Location
         // Read the backpack once so every prerequisite check uses the same state.
         bool hasCostume = player.Backpack.Has(CostumeItem);
         bool hasRing = player.Backpack.Has(RingItem);
+    
 
         if (!hasCostume && !hasRing)
         {
