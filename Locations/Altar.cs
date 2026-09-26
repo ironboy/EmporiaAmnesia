@@ -10,6 +10,9 @@ class Altar : Location
     private Ex _ex = new();
     private Partner _partner = new();
 
+    // Checking if the drama with the ex has started or not
+    private bool _dramaHasStarted = false;
+
     public Altar()
     {
         Name = "Altaret";
@@ -43,9 +46,20 @@ class Altar : Location
             return;
         }
 
-        // Each NPC owns its own dialogue; the altar only controls the sequence.
-        _priest.Interact(player);
-        _ex.Interact(player);
-        _partner.Interact(player);
+        // Checking if the drama has happened
+        if (_dramaHasStarted)
+        {
+            // If the drama has happened 
+            _partner.Interact(player, true);
+        }
+        else
+        {
+            // Each NPC owns its own dialogue; the altar only controls the sequence.
+            _priest.Interact(player);
+            _ex.Interact(player);
+            _partner.Interact(player);
+
+            _dramaHasStarted = true;
+        }
     }
 }
