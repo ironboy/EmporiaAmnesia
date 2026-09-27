@@ -1,6 +1,8 @@
 // The partner owns this part of the wedding conversation.
 class Partner : Npc
 {
+    private const string DivorceCertificateItem = "skilsmässobevis";
+
     public Partner()
     {
         Name = "Partnern";
@@ -9,7 +11,7 @@ class Partner : Npc
     public void Interact(Player player, bool dramaHasStarted)
     {
         // This plays out, when you've already interacted at the Altar at least once 
-        // Here is when dramaHasStarted = true
+        //Here is when dramaHasStarted = true
         if (dramaHasStarted)
         {
             Console.WriteLine("Partnern står vid altaret och ser jätteorolig ut.");
@@ -25,12 +27,20 @@ class Partner : Npc
 
             if (choice == 1)
             {
-                Console.WriteLine("Vad bra, nu kan vi gifta oss!");
+                if (player.Backpack.Has(DivorceCertificateItem))
+                {
+                    Console.WriteLine("Vad bra, du hittade skilsmässobeviset.");
+                    Console.WriteLine("Gå tillbaka till vigseln när ni är redo.");
+                    return;
+                }
+
+                Console.WriteLine("Jag ser inte skilsmässobeviset i din ryggsäck.");
+                Console.WriteLine("Du behöver hitta det innan ni kan gifta er.");
                 return;
             }
 
-            Console.WriteLine("GAME OVER!");
-            player.GameOver = true;
+            Console.WriteLine("Då får vi vänta. Hitta skilsmässobeviset innan vigseln fortsätter.");
+            return;
         }
         else
         {
