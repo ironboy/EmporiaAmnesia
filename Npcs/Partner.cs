@@ -1,6 +1,7 @@
 // The partner owns this part of the wedding conversation.
 class Partner : Npc
 {
+    // Shared item-name contract: group 9 provides this item; group 10 checks it at the ending.
     private const string DivorceCertificateItem = "skilsmässobevis";
 
     public Partner()
@@ -27,6 +28,7 @@ class Partner : Npc
 
             if (choice == 1)
             {
+                // Group 8 verifies the player's claim for this conversation; it does not provide the item.
                 if (player.Backpack.Has(DivorceCertificateItem))
                 {
                     Console.WriteLine("Vad bra, du hittade skilsmässobeviset.");
