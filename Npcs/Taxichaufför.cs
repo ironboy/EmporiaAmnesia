@@ -30,11 +30,6 @@ class TaxiDriver : Npc
             
             // Spelaren får tumen upp! och får åka taxi
             Console.WriteLine("\"Bra! du har allt med dig, då kör vi till bröloppet.\"");
-            
-            // Spelaren förflyttas till bröloppet!
-            player.Row = 3;
-            player.Col = 5;
-
             return;
 
         }
