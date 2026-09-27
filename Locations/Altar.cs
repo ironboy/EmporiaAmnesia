@@ -24,6 +24,14 @@ class Altar : Location
         // Read the backpack once so every prerequisite check uses the same state.
         bool hasCostume = player.Backpack.Has(CostumeItem);
         bool hasRing = player.Backpack.Has(RingItem);
+
+        // If the player is missing BOTH costume and ring
+        if (!hasCostume && !hasRing)
+        {
+            Console.WriteLine("Prästen tittar på dig.");
+            Console.WriteLine("\"Du saknar både kostym och ring.\"");
+            return;
+        }
     
 
         if (!hasCostume)
