@@ -21,6 +21,8 @@ class Altar : Location
 
     public override void Interact(Player player)
     {
+
+        
         // Read the backpack once so every prerequisite check uses the same state.
         bool hasCostume = player.Backpack.Has(CostumeItem);
         bool hasRing = player.Backpack.Has(RingItem);
