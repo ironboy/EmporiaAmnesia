@@ -21,7 +21,7 @@ class Wedding : Location
             );
             if (chosen == 2 /*Nej*/)
             {
-                Console.WriteLine("Du har besämt dig att ta det dig därifrån. Du sprang mot ungången medan alla som var i bröllopet undrar vad du gör. På vägg ut du hoppade och sa \"FREDOOM!!!!\"");
+                Console.WriteLine("Du har besämt dig att ta det dig därifrån. Du sprang mot ungången medan alla som var i bröllopet undrar vad du gör. På vägg ut du hoppade och sa \"FREEDOM!!!!\"");
                 player.GameOver = true;
             }
             else
