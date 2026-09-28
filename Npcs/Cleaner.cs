@@ -5,7 +5,7 @@ class Cleaner : Npc
 
   public Cleaner()
   {
-    Name = "Städaren";
+    Name = "Städerskan";
   }
 
   public override void Interact(Player player)
