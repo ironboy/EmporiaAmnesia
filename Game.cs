@@ -22,7 +22,7 @@ class Game
       // DECISION: Let's start with nothing!
 
       // We need a keycard to test grupp 6 part with
-      player.Backpack.Add(new Item("Nyckelkort", "Ett nyckelkort kan det användas för stängda avdelningar?"));
+      //player.Backpack.Add(new Item("Nyckelkort", "Ett nyckelkort kan det användas för stängda avdelningar?"));
     }
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)

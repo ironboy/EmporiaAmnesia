@@ -5,13 +5,15 @@ class Map
   // Row 0 is north, column 0 is west. null = nothing there.
   // See docs/SYNOPSIS.md for which group owns which locations.
 
+
   public static Location?[][] Locations =
   [
-    [new Roof2(),               null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],
-    [new Foyer(),               new Escalator2(),   new CorridorA(),          null,                      null,               null],
-    [new ToiletStall(),         null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null],
-    [null,                      null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding()],
-    [new Staffarea1(),          new Staffarea2(),   new BackRoom(),           new SurveillanceRoom(),    null,               null]
+    [new Roof2(),        null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],
+    [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null],
+    [new ToiletStall(),  null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null],
+    [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding()],
+    [new Staffarea1(),   new Staffarea2(),   new BackRoom(),           new SurveillanceRoom(),    null,               new Church()],
+    [null,               null,               null,                     null,                      null,               new Altar()]
   ];
 
 
