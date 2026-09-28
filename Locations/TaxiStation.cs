@@ -52,10 +52,9 @@ class TaxiStation : Location
     }
 
     _taxiDriver.Interact(player);
-    if (_taxiDriver.Taxiresa)
+    if (!player.GameOver)
     {
         Console.WriteLine("Du sätter dig i backsätet och taxin börjar att gasa iväg genom staden.");
-        _taxiDriver.Taxiresa = false;
         player.Teleport("Wedding");
     }
   }
