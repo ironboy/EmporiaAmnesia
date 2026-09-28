@@ -1,3 +1,5 @@
+using System.Net.Mail;
+
 class Map
 {
   // Row 0 is north, column 0 is west. null = nothing there.
