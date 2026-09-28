@@ -14,14 +14,12 @@ class Wedding : Location
         if(player.Backpack.Has("kostym")&& player.Backpack.Has("ring"))   //If player has the 2 objects in the backpack then this function is called, otherwhise check next one
         {
             Console.WriteLine($"Du kommer fram till bröllopet i tid. Du ser fantastisk ut och ringen förbered för att skapa din dröm äktenskap med din kärleksfull fiancé. Hon ser fantastiks ut också och du kommer fram för att börja bröllopet...\n Efter en tag prästen be dig att sätta på ringen. Senare kommer till punkten där han frågar. \"Vill du gifta dig med henne? ...\" Plöstligt tiden stannar för dig själv och du börjar att fundera på alla hinder du har fått för att nå hit..i denna stunden... Du börjar undrar om någon har sett dig i den situationen för att hindra dig göra ett misttag. Efter en lång genomgån på dina känslor bestämde du dig att...");
-            Console.WriteLine("Vill du försätta med bröllopet eller avbryta dem? /n");    //Because our group wanted to add a choice of leaving even if you had everything I got to add a new choice.
-            string? answer = Console.ReadLine();
-            while(answer?.ToLower() != "j" && answer?.ToLower() != "n")         //Making sure that I get an answer from the player and the program is not crashing
-            {
-                Console.WriteLine("Svara med j(ja) eller n(nej).");
-                answer = Console.ReadLine();
-            }
-            if (answer.ToLower() == "j")
+            Menu getMarried = new Menu();
+            int chosen = getMarried.Ask(
+                "Vill du försätta med bröllopet eller avbryta dem?", 
+                ["Ja", "Nej"]
+            );
+            if (chosen == 2 /*Nej*/)
             {
                 Console.WriteLine("Du har bestämt dig att försätta med bröllopet och gifta med din älskade, bröllopet gick som det skulle och du inser att du har gjort det bästa val i hela ditt liv... SLUT.");
                 player.GameOver = true;
@@ -31,6 +29,7 @@ class Wedding : Location
                 Console.WriteLine("Du har besämt dig att ta det dig därifrån. Du sprang mot ungången medan alla som var i bröllopet undrar vad du gör. På vägg ut du hoppade och sa \"FREDOOM!!!!\"");
                 player.GameOver = true;
             }
+        
         }
         else if (player.Backpack.Has("kostym"))   
         {
