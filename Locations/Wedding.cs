@@ -21,12 +21,13 @@ class Wedding : Location
             );
             if (chosen == 2 /*Nej*/)
             {
-                Console.WriteLine("Du har bestämt dig att försätta med bröllopet och gifta med din älskade, bröllopet gick som det skulle och du inser att du har gjort det bästa val i hela ditt liv... SLUT.");
+                Console.WriteLine("Du har besämt dig att ta det dig därifrån. Du sprang mot ungången medan alla som var i bröllopet undrar vad du gör. På vägg ut du hoppade och sa \"FREDOOM!!!!\"");
                 player.GameOver = true;
             }
             else
             {
-                Console.WriteLine("Du har besämt dig att ta det dig därifrån. Du sprang mot ungången medan alla som var i bröllopet undrar vad du gör. På vägg ut du hoppade och sa \"FREDOOM!!!!\"");
+                
+                Console.WriteLine("Du har bestämt dig att försätta med bröllopet och gifta med din älskade, bröllopet gick som det skulle och du inser att du har gjort det bästa val i hela ditt liv... SLUT.");
                 player.GameOver = true;
             }
         
