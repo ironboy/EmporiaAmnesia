@@ -23,10 +23,9 @@ class Game
       player.Backpack.Add(new Item("ring", "Ring"));
       player.Backpack.Add(new Item("skilsmässobevis", "Skilsmässobevis"));
       player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
+      player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));
+      player.Backpack.Add(new Item("Nyckelkort", "Ett nyckelkort kan det användas för stängda avdelningar?"));
       */
-      /*player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));
-      player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));*/
-      // DECISION: Let's start with nothing!
     }
     Console.WriteLine("EMPORIA AMNESIA");
     while (isRunning)

@@ -1,18 +1,20 @@
+using System.Net.Mail;
+
 class Map
 {
   // Row 0 is north, column 0 is west. null = nothing there.
   // See docs/SYNOPSIS.md for which group owns which locations.
+
+
   public static Location?[][] Locations =
   [
-      [null,               null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],
-    [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null],
-    [new ToiletStall(),  null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null],
-    [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding(),  null,               new LivingRoom()],
-    [null,               null,               new BackRoom(),           new SurveillanceRoom(),    null,               null,   new OutsideHouse(), new TheHall(), new Kitchen()],
-    [null,               null,               null,                     null,                      null,               null,    null,               new Bedroom()]
-    ];
-
-
+    [new Roof2(),        null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null,           null,               null,             null],
+    [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null,           null,               null,             null],
+    [new ToiletStall(),  null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null,           null,               null,             null],
+    [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding(),  null,               new LivingRoom(), null],
+    [new Staffarea1(),   new Staffarea2(),   new BackRoom(),           new SurveillanceRoom(),    null,               new Church(),   new OutsideHouse(), new TheHall(),    new Kitchen()],
+    [null,               null,               null,                     null,                      null,               new Altar(),    null,               new Bedroom(),    null]
+  ];
 
   // A static constructor runs once, after the static fields above have been
   // built - so this is the first moment the whole map exists. Every location
