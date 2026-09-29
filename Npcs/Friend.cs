@@ -56,9 +56,9 @@ class Friend : Npc
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
         string art = @"
-                                                       Z
-                                                  z  Z
-                                                z
+                         Z
+                    z  Z
+                z
             _____
            /     \
           |  x x  |_________________________________
