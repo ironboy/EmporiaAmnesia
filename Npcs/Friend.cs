@@ -1,3 +1,5 @@
+using System.Runtime.InteropServices;
+
 class Friend : Npc
 {
     private bool talkToFriend = true;
@@ -13,6 +15,7 @@ class Friend : Npc
     {
         bool friendInt = true;
         Console.Clear();
+        System.Console.WriteLine(DrawFriend());
         while (friendInt)
         {
 
@@ -47,6 +50,24 @@ class Friend : Npc
                 }
             }
         }
+    }
+    public static string DrawFriend()
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        string art = @"
+                                                       Z
+                                                  z  Z
+                                                z
+            _____
+           /     \
+          |  x x  |_________________________________
+          |   o   |      ___                 [kr]  |_______________
+  ______   \_____/\_____/   \________________[__]__|______________/\
+ (______)=o                 \__)                           \_______\/
+ ═══════════════════════════════════════════════════════════════════════
+";
+return art;
     }
 }
 
