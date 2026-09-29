@@ -17,10 +17,9 @@ class Cleaner : Npc
     {
       Console.WriteLine("\n\"Städerskan såg att du kom in med en kompis här igårkväll.\"");
       Console.WriteLine("\n\"Du har inget minne från igår och undrar om han också är här?\"");
-      Console.WriteLine("\"Städerskan pekar mot städförrådet.\"");
-      Console.WriteLine("\"Du går mot städförrådet och öppnar nyfiket.\"");
+      Console.WriteLine("\"Städerskan pekar mot städförrådet (Väster)\"");
       FindFriend = true;
-      Console.ReadLin();
+      Console.ReadLine();
   }
 }
 }
