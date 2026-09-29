@@ -11,7 +11,6 @@ class Foyer : Location
   {
     Name = "Foajé";
     Description = $"{DrawFoyer()}En städerska går långsamt runt med sin städvagn och plockar undan skräp.\nNär hon får syn på mig så stannar hon upp och tittar på mig.\n\"Jasså, är du kvar här?\"";
-    DrawFoyer();
 
   }
 
