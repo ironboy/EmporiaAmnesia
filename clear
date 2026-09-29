@@ -1,0 +1,388 @@
+[33mcommit 5a6d578347d90d554cc194762aca52f309458328[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mpatch-introtext[m[33m, [m[1;31morigin/patch-introtext[m[33m)[m
+Merge: e148dfd 0ff6d25
+Author: Aldo651A <aldito43ariasg@hotmail.se>
+Date:   Tue Sep 29 11:46:11 2026 +0200
+
+    Merge branch 'patch-introtext' of https://github.com/ironboy/EmporiaAmnesia into patch-introtext
+
+[33mcommit e148dfddd2d207d62076a14721ace7bdf024dfcc[m
+Author: Aldo651A <aldito43ariasg@hotmail.se>
+Date:   Tue Sep 29 11:33:22 2026 +0200
+
+    Ändrat teleport-destination från weding till OutsideChurch
+
+[1mdiff --git a/Locations/TaxiStation.cs b/Locations/TaxiStation.cs[m
+[1mindex 144e7d8..9a11c0b 100644[m
+[1m--- a/Locations/TaxiStation.cs[m
+[1m+++ b/Locations/TaxiStation.cs[m
+[36m@@ -55,7 +55,7 @@[m [mclass TaxiStation : Location[m
+     if (!player.GameOver)[m
+     {[m
+         Console.WriteLine("Du sätter dig i backsätet och taxin börjar att gasa iväg genom staden.");[m
+[31m-        player.Teleport("Wedding");[m
+[32m+[m[32m        player.Teleport("OutsideChurch");[m
+     }[m
+   }[m
+ }[m
+
+[33mcommit 0ff6d2573952f6b8dca886628c3840e6fa6a4f3b[m
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 14:37:53 2026 +0200
+
+    changed introtext
+
+[1mdiff --git a/Locations/ToiletStall.cs b/Locations/ToiletStall.cs[m
+[1mindex 20e0d76..8d9bba0 100644[m
+[1m--- a/Locations/ToiletStall.cs[m
+[1m+++ b/Locations/ToiletStall.cs[m
+[36m@@ -4,7 +4,7 @@[m [mclass ToiletStall : Location[m
+   public ToiletStall()[m
+   {[m
+     Name = "Toalettbås";[m
+[31m-    Description = "Jag vaknar upp i ett toalettbås, bredvid en tom spritflaska.\nAj! Jag skulle... jag eh.. kommer inte riktigt ihåg...\nJag har en ryggsäck på mig...\nHmm där på golvet ser det ut som en skrynklig lapp ligger,\nvad är det för något?";[m
+[32m+[m[32m    Description = "Jag vaknar upp i ett toalettbås, förvirrad, bredvid en tom spritflaska.\nAj! Jag skulle... jag eh.. kommer inte riktigt ihåg...\nJag har en ryggsäck på mig...\nHmm där på golvet ser det ut som en skrynklig lapp ligger,\nvad är det för något?";[m
+     Items.Add(new Item("kemtvättskvitto", "Efter att vecklat ut kvittot så ser jag att det är en kostym som är inlämnad.\nPå baksidan så står det några siffror: 5361"));[m
+     Items.Add(new Item("tom spritflaska", "Kanske jag kan använda denna någonstans."));[m
+   }[m
+
+[33mcommit 3933f1e1635ef30af52014c532fdabdc89966bae[m[33m ([m[1;32mdev[m[33m)[m
+Author: n1cl4s <niclas.calabrano@gmail.com>
+Date:   Mon Sep 28 14:31:35 2026 +0200
+
+    städerskan
+
+[1mdiff --git a/Npcs/Cleaner.cs b/Npcs/Cleaner.cs[m
+[1mindex eb4de2a..783f2bb 100644[m
+[1m--- a/Npcs/Cleaner.cs[m
+[1m+++ b/Npcs/Cleaner.cs[m
+[36m@@ -5,7 +5,7 @@[m [mclass Cleaner : Npc[m
+ [m
+   public Cleaner()[m
+   {[m
+[31m-    Name = "Städaren";[m
+[32m+[m[32m    Name = "Städerskan";[m
+   }[m
+ [m
+   public override void Interact(Player player)[m
+
+[33mcommit 7ab73cb08e98089e504e60167ab13e4e4abc4ae6[m
+Merge: c624ce9 4e2f808
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 14:29:38 2026 +0200
+
+    Merge pull request #18 from ironboy/feature-10-brollopetsslut
+    
+    Feature 10 brollopetsslut
+
+[33mcommit 4e2f80816eb7d3f6469145cb5c1eec403a5e37ba[m[33m ([m[1;31morigin/feature-10-brollopetsslut[m[33m)[m
+Merge: 84512ad c624ce9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 14:27:59 2026 +0200
+
+    Merge branch 'dev' into feature-10-brollopetsslut
+    Added outside Church + temp classes for notes: Wedding7 and Wedding10, not integrated
+
+[33mcommit c624ce9b97006ce4d93fcb7be15cc47941045a8e[m
+Merge: 92f8a4a b854d16
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 14:05:28 2026 +0200
+
+    Merge pull request #17 from ironboy/feature-9-beviset
+    
+    Feature 9 beviset
+
+[33mcommit b854d16069c85f967a5101223e2db2c494e322e4[m[33m ([m[1;31morigin/feature-9-beviset[m[33m)[m
+Merge: f119096 92f8a4a
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 14:01:49 2026 +0200
+
+    Merge branch 'dev' into feature-9-beviset
+
+[33mcommit 92f8a4add6d7eadb2d4ac5588d7bbff27645ef48[m
+Merge: c982643 d99d37c
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 13:51:54 2026 +0200
+
+    Merge pull request #16 from ironboy/feature-8-brollopet
+    
+    Feature 8 brollopet
+
+[33mcommit d99d37ce9a3c7bc563720c9da86c21ba260003e1[m[33m ([m[1;31morigin/feature-8-brollopet[m[33m)[m
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 13:49:47 2026 +0200
+
+    removed dev code
+
+[1mdiff --git a/Game.cs b/Game.cs[m
+[1mindex 60e8104..f364111 100644[m
+[1m--- a/Game.cs[m
+[1m+++ b/Game.cs[m
+[36m@@ -22,7 +22,7 @@[m [mclass Game[m
+       // DECISION: Let's start with nothing![m
+ [m
+       // We need a keycard to test grupp 6 part with[m
+[31m-      player.Backpack.Add(new Item("Nyckelkort", "Ett nyckelkort kan det användas för stängda avdelningar?"));[m
+[32m+[m[32m      //player.Backpack.Add(new Item("Nyckelkort", "Ett nyckelkort kan det användas för stängda avdelningar?"));[m
+     }[m
+     Console.WriteLine("EMPORIA AMNESIA");[m
+     while (isRunning)[m
+
+[33mcommit 0087a3c185c32d849f98f8c8f156ced366ff8ac7[m
+Merge: 85a494e c982643
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 13:49:12 2026 +0200
+
+    Merge branch 'dev' into feature-8-brollopet
+
+[33mcommit c982643ab19b8281c88c5b3596e95cdf92432f3e[m
+Merge: bc6ffd5 27d1114
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 13:35:50 2026 +0200
+
+    Merge pull request #15 from ironboy/feature-7-finalen
+    
+    Feature 7 finalen
+
+[33mcommit 27d1114ebffb11297d3ed9771fe01b9df5089e2d[m[33m ([m[1;31morigin/feature-7-finalen[m[33m)[m
+Merge: 1c9a24a bc6ffd5
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 13:35:21 2026 +0200
+
+    merged dev and added desciptions for blind paths
+
+[33mcommit 1c9a24a597e9ddcaf9f313c093506eaf286dbede[m
+Merge: 7b2decc c4c4ae9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 13:19:11 2026 +0200
+
+    Merge branch 'dev' into feature-7-finalen
+
+[33mcommit bc6ffd5ea97f83bcb89db459ab1a4eeab74ff8ef[m
+Merge: 9683e33 a1c80a9
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 12:01:46 2026 +0200
+
+    Merge pull request #14 from ironboy/feature-6-taket
+    
+    Feature 6 taket
+
+[33mcommit a1c80a93dba0a4359846228f73e374d6354ce50d[m[33m ([m[1;31morigin/feature-6-taket[m[33m)[m
+Merge: 9fd1c7f c4c4ae9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:59:56 2026 +0200
+
+    Merge branch 'dev' into feature-6-taket
+
+[33mcommit 9683e330befccb8ed700017f1bf9c504a1f6be2c[m
+Merge: 1f90015 f755ef2
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:58:55 2026 +0200
+
+    Merge pull request #13 from ironboy/feature-5-kemtvatten
+    
+    Feature 5 kemtvatten
+
+[33mcommit f755ef2155b3c0b8dd44ddb6ffec774f56fbf416[m[33m ([m[1;31morigin/feature-5-kemtvatten[m[33m)[m
+Merge: 6d00337 c4c4ae9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:56:13 2026 +0200
+
+    Merge branch 'dev' into feature-5-kemtvatten
+
+[33mcommit 1f90015ca2554b59044a0bf703c3da703d5f4c19[m
+Merge: ae8759f 0d120bf
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:53:57 2026 +0200
+
+    Merge pull request #12 from ironboy/feature-4-vaktkontoret
+    
+    Feature 4 vaktkontoret
+
+[33mcommit 0d120bfb54b76277d48f0942e87a7dfa7abeccae[m[33m ([m[1;31morigin/feature-4-vaktkontoret[m[33m)[m
+Merge: 305fe83 c4c4ae9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:50:14 2026 +0200
+
+    Merge branch 'dev' into feature-4-vaktkontoret
+    Skriva vad jag vill..
+
+[33mcommit ae8759f50852e16c96b989b5eeb974f28aa495c1[m
+Merge: 3bf088c 369de55
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:48:24 2026 +0200
+
+    Merge pull request #11 from ironboy/feature-3-kodlaset
+    
+    Feature 3 kodlaset
+
+[33mcommit 369de5500513d183aa59812727a2406c2abd17f1[m[33m ([m[1;31morigin/feature-3-kodlaset[m[33m)[m
+Merge: e7cd7e4 c4c4ae9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:43:41 2026 +0200
+
+    Merge branch 'dev' into feature-3-kodlaset
+
+[33mcommit 3bf088c2004b78431ebc46c5766e8e0b01e8c06d[m
+Merge: c4c4ae9 6a1b0b4
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:42:18 2026 +0200
+
+    Merge pull request #9 from ironboy/feature-2-rulltrapporna
+    
+    Feature 2 rulltrapporna
+
+[33mcommit 6a1b0b4334fac542e07aeed159a1bfbe925f676b[m[33m ([m[1;31morigin/feature-2-rulltrapporna[m[33m)[m
+Merge: 3c06142 c4c4ae9
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:38:12 2026 +0200
+
+    Merge branch 'dev' into feature-2-rulltrapporna
+
+[33mcommit c4c4ae9b44c4d165697317a492b22e7c1ff714b7[m
+Merge: 71d8d0e cd7edbc
+Author: Benjamin Berglund <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:36:03 2026 +0200
+
+    Merge pull request #8 from ironboy/feature-1-uppvaknandet
+    
+    Feature 1 uppvaknandet
+
+[33mcommit cd7edbc89dc61a7236a4b2229a8447800d57e085[m[33m ([m[1;31morigin/feature-1-uppvaknandet[m[33m)[m
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 11:31:14 2026 +0200
+
+    removed thingy
+
+[1mdiff --git a/Game.cs b/Game.cs[m
+[1mindex 59ae406..4ae720d 100644[m
+[1m--- a/Game.cs[m
+[1m+++ b/Game.cs[m
+[36m@@ -16,6 +16,7 @@[m [mclass Game[m
+     {[m
+       // Test items so you can try any location right away. Only while isDev is true -[m
+       // in the real game the player finds these in the toilet stall (group 1).[m
+[32m+[m[32m      //player.Backpack.Add(new Item("skilsmässobevis", "Skilsmässobevis"));[m
+       /*player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));[m
+       player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));*/[m
+       // DECISION: Let's start with nothing![m
+
+[33mcommit 7b2decccd6d93836543e5b86f4258c1389a256a0[m[33m ([m[1;32mfeature-7-finalen[m[33m)[m
+Merge: 254bd4e 3e68cc6
+Author: Aldo651A <aldito43ariasg@hotmail.se>
+Date:   Mon Sep 28 10:41:17 2026 +0200
+
+    Merge branch 'feature-7-finalen' of https://github.com/ironboy/EmporiaAmnesia into feature-7-finalen
+
+[33mcommit 254bd4ec8b2b60538192467f80a60ff7afc4c891[m
+Author: Aldo651A <aldito43ariasg@hotmail.se>
+Date:   Mon Sep 28 10:41:12 2026 +0200
+
+    har inte gjort ändringar
+
+[1mdiff --git a/Map.cs b/Map.cs[m
+[1mindex 2b3e4d3..a544aea 100644[m
+[1m--- a/Map.cs[m
+[1m+++ b/Map.cs[m
+[36m@@ -1,3 +1,5 @@[m
+[32m+[m[32musing System.Net.Mail;[m
+[32m+[m
+ class Map[m
+ {[m
+   // Row 0 is north, column 0 is west. null = nothing there.[m
+[36m@@ -8,7 +10,8 @@[m [mclass Map[m
+     [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null],[m
+     [new ToiletStall(),  null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null],[m
+     [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding()],[m
+[31m-    [null,               null,               new BackRoom(),           new SurveillanceRoom(),    null,               null][m
+[32m+[m[32m    [null,               null,               new BackRoom(),           new SurveillanceRoom(),    null,               null],[m
+[32m+[m[41m    [m
+   ];[m
+ [m
+ [m
+
+[33mcommit f119096cd54e864afb5d6e8ed1dedfc1d98032e5[m
+Author: WeeHorse <benjaminberglund@gmail.com>
+Date:   Mon Sep 28 10:39:30 2026 +0200
+
+    patchade in klasserna i Map
+
+[1mdiff --git a/Game.cs b/Game.cs[m
+[1mindex 59ae406..bd95788 100644[m
+[1m--- a/Game.cs[m
+[1m+++ b/Game.cs[m
+[36m@@ -16,6 +16,14 @@[m [mclass Game[m
+     {[m
+       // Test items so you can try any location right away. Only while isDev is true -[m
+       // in the real game the player finds these in the toilet stall (group 1).[m
+[32m+[m[32m      /*[m
+[32m+[m[32m      player.Backpack.Add(new Item("taxikort", "Taxikort"));[m
+[32m+[m[32m      player.Backpack.Add(new Item("adressen", "Adress"));[m
+[32m+[m[32m      player.Backpack.Add(new Item("kostym", "Kostym"));[m
+[32m+[m[32m      player.Backpack.Add(new Item("ring", "Ring"));[m
+[32m+[m[32m      player.Backpack.Add(new Item("skilsmässobevis", "Skilsmässobevis"));[m
+[32m+[m[32m      player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));[m
+[32m+[m[32m      */[m
+       /*player.Backpack.Add(new Item("pengar", "25000 kronor, najs..."));[m
+       player.Backpack.Add(new Item("kemtvättskvitto", "ett kvitto från kemtvätten här på Emporia för min frack"));*/[m
+       // DECISION: Let's start with nothing![m
+[1mdiff --git a/Locations/Bedroom.cs b/Locations/Bedroom.cs[m
+[1mindex 122b139..4173166 100644[m
+[1m--- a/Locations/Bedroom.cs[m
+[1m+++ b/Locations/Bedroom.cs[m
+[36m@@ -3,16 +3,16 @@[m [mclass Bedroom : Location[m
+     public Bedroom()[m
+     {[m
+         Name = "Sovrummet";[m
+[31m-        Description = "Du står i sovrummet. Det är mörkt och tyst. På nattduksbordet ligger det ett brev. Det är skillsmässobeviset.";[m
+[31m-       [m
+[32m+[m[32m        Description = "Du står i sovrummet. Det är mörkt och tyst. På nattduksbordet ligger det ett brev. Det är skilsmässobeviset.";[m
+[32m+[m
+     }[m
+ [m
+     public override void Interact(Player player)[m
+     {[m
+[31m-        if (!player.Backpack.Has("Brev"))[m
+[32m+[m[32m        if (!player.Backpack.Has("skilsmässobevis"))[m
+         {[m
+             Console.WriteLine("Du plockar upp brevet från nattduksbordet och lägger det i din ryggsäck.");[m
+[31m-            player.Backpack.Add(new Item("Brev", "Ett brev som ligger på nattduksbordet. Det ser ut att vara skilsmässobeviset."));[m
+[32m+[m[32m            player.Backpack.Add(new Item("skilsmässobevis", "Ett brev som ligger på nattduksbordet. Det ser ut att vara skilsmässobeviset."));[m
+         }[m
+         else[m
+         {[m
+[1mdiff --git a/Locations/TheHall.cs b/Locations/TheHall.cs[m
+[1mindex 9a54c15..e8bd7a5 100644[m
+[1m--- a/Locations/TheHall.cs[m
+[1m+++ b/Locations/TheHall.cs[m
+[36m@@ -3,7 +3,7 @@[m [mclass TheHall : Location[m
+     public TheHall()[m
+     {[m
+         Name = "Hallen";[m
+[31m-        Description = "Du står i hallen. Framför dig är vardagsrummet, till vänster är köket och till höger är sovrummet.";[m
+[31m-        [m
+[32m+[m[32m        Description = "Du står i hallen. Norrut är vardagsrummet, till höger är köket och söderut är sovrummet.";[m
+[32m+[m
+     }[m
+ }[m
+[1mdiff --git a/Map.cs b/Map.cs[m
+[1mindex 2b3e4d3..5a31539 100644[m
+[1m--- a/Map.cs[m
+[1m+++ b/Map.cs[m
+[36m@@ -4,12 +4,13 @@[m [mclass Map[m
+   // See docs/SYNOPSIS.md for which group owns which locations.[m
+   public static Location?[][] Locations =[m
+   [[m
+[31m-    [null,               null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],[m
+[32m+[m[32m      [null,               null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],[m
+     [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null],[m
+     [new ToiletStall(),  null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null],[m
+[31m-    [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding()],[m
+[31m-    [null,               null,               new BackRoom(),           new SurveillanceRoom(),    null,               null][m
+[31m-  ];[m
+[32m+[m[32m    [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding(),  null,               new LivingRoom()],[m
+[32m+[m[32m    [null,               null,               new BackRoom(),           new SurveillanceRoom(),    null,               null,   new OutsideHouse(), new TheHall(), new Kitchen()],[m
+[32m+[m[32m    [null,               null,               null,                     null,                      null,               null,    null,               new Bedroom()][m
+[32m+[m[32m    ];[m
+ [m
+ [m
+ [m

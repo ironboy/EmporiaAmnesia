@@ -17,16 +17,16 @@ class TaxiDriver : Npc
         if (adressen == 2)
         {
             // playern väljer Nej och Taxichauffören svarar
-            Console.WriteLine("\"Har du ingen adress!\"");
+            Console.WriteLine("\"Har du ingen adressen!\"");
             Console.WriteLine("\"Jag kan tyvärr inte köra dig\"");
             player.GameOver = true;
         }
         //2. Här kontrollerar vi om spelaren uppfyller vilkorna för att åka Taxi
-        else if (player.Backpack.Has("adressen") && player.Backpack.Has("taxikort"))
+        else if (player.Backpack.Has("adressen") && player.Backpack.Has("taxikortet"))
         {
             // Spelaren har både taxikort och adressen. Resan blir möjligt
             player.Backpack.Remove("adressen");
-            player.Backpack.Remove("taxikort");
+            player.Backpack.Remove("taxikortet");
             
             // Spelaren får tumen upp! och får åka taxi
             Console.WriteLine("\"Bra! du har allt med dig, då kör vi till bröloppet.\"");
