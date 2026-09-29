@@ -22,11 +22,11 @@ class TaxiDriver : Npc
             player.GameOver = true;
         }
         //2. Här kontrollerar vi om spelaren uppfyller vilkorna för att åka Taxi
-        else if (player.Backpack.Has("adressen") && player.Backpack.Has("taxikortet"))
+        else if (player.Backpack.Has("adressen") && player.Backpack.Has("taxikort"))
         {
             // Spelaren har både taxikort och adressen. Resan blir möjligt
             player.Backpack.Remove("adressen");
-            player.Backpack.Remove("taxikortet");
+            player.Backpack.Remove("taxikort");
             
             // Spelaren får tumen upp! och får åka taxi
             Console.WriteLine("\"Bra! du har allt med dig, då kör vi till bröloppet.\"");
@@ -36,7 +36,7 @@ class TaxiDriver : Npc
         else
         {
             // Uppfyller du inte vilkopren så är spelet slut!
-            Console.WriteLine("\"Du måste ha både adressen och taxikortet för att åka vidare ");
+            Console.WriteLine("\"Du måste ha både adressen och taxikortet för att åka vidare !\"");
             player.GameOver = true;
         }
         
