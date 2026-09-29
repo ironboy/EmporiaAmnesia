@@ -4,8 +4,8 @@ public BackRoom()
   {
     Name = "Bakrummet";
     Description = "Jag har kommit in i det lilla rummet bakom kemtvätten. Det är saker överallt. En hög med kläder, en tvättkorg, en liten skål med mynt, knappar och andra småsaker. ";
-    
-    // Lägger till föremål som spelaren kan undersöka och ta med sig
+    Directions = [Direction.North, Direction.West, Direction.South];
+
     Items.Add(new Item("smutstvätt", "Kanske något som passar till kostymen?."));
     Items.Add(new Item("jordnötsringar", "Kan funka som vigselring i nödfall? ."));
   }
