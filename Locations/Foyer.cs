@@ -10,12 +10,40 @@ class Foyer : Location
   public Foyer()
   {
     Name = "Foajé";
-    Description = "Jag kommer till en stor foajé.\nEn städerska går långsamt runt med sin städvagn och plockar undan skräp.\nNär hon får syn på mig så stannar hon upp och tittar på mig.\n\"Jasså, är du kvar här?\"";
+    Description = $"{DrawFoyer()}En städerska går långsamt runt med sin städvagn och plockar undan skräp.\nNär hon får syn på mig så stannar hon upp och tittar på mig.\n\"Jasså, är du kvar här?\"";
+
   }
+
+  public static string DrawFoyer()
+  {
+    Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+    string art = @"
+                                   ▲
+                                  NORR
+                           Trappa till taket
+              ╔═════════════════╗      ╔═════════════════╗
+              ║  [====]         ║      ║         [====]  ║
+              ║                                          ║
+              ║          O                               ║
+    VÄST      ║  ____   /|\                 o            ║      ÖST
+ Städförråd ◄──  |____|_/ \                /|\            ──► Rulltrappa
+              ║   o  o   städerska         / \           ║
+              ║                            DU            ║
+              ║                                          ║
+              ║  [_]            ║      ║           [_]   ║
+              ╚═════════════════╝      ╚═════════════════╝
+                              Toalettbåset
+                                 SÖDER
+                                   ▼
+";
+return art;
+  }
+
 
   public override void Interact(Player player)
   {
-    if (cleanerCount > 2)
+    if (cleanerCount >= 1)
     {
       cleaner = false;
       friend = true;
@@ -29,7 +57,7 @@ class Foyer : Location
         _money = true;
       }
     }
-    
+
     if (cleaner == true)
     {
       _cleaner.Interact(player);
