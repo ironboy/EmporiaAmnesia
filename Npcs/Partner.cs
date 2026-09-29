@@ -1,84 +1,85 @@
-// The partner owns this part of the wedding conversation.
 class Partner : Npc
 {
-    // Shared item-name contract: group 9 provides this item; group 10 checks it at the ending.
-    private const string DivorceCertificateItem = "skilsmässobevis";
-
     public Partner()
     {
-        Name = "Partnern";
+        Name = "Partner";
     }
 
+    public override void Interact(Player player)
+    {
+        // The partner reacts after the ex interrupts the wedding
+        Console.WriteLine();
+        Console.WriteLine("Partnern tittar chockat på exet.");
+        Console.WriteLine();
+
+        Console.WriteLine(
+            "\"Vad pratar du om? Det där är inte sant!\""
+        );
+
+        Console.WriteLine();
+
+        Console.WriteLine(
+            "\"Vi kan bevisa att äktenskapet är avslutat.\""
+        );
+    }
+
+
+    // This interaction is used when the player returns after the drama
     public void Interact(Player player, bool dramaHasStarted)
     {
-        // This plays out, when you've already interacted at the Altar at least once 
-        //Here is when dramaHasStarted = true
         if (dramaHasStarted)
         {
-            Console.WriteLine("Partnern står vid altaret och ser jätteorolig ut.");
-            Console.WriteLine("Fick du tag på skilsmässobeviset?");
+            Console.WriteLine();
+            Console.WriteLine("Partnern tittar på dig.");
+            Console.WriteLine();
 
-            int choice = new Menu().Ask(
-                "Vad svarar du?",
-                [
-                "Ja, jag hittade den.",
-                "Nej, jag är ledsen jag hittade inte den."
-                ]
+            Console.WriteLine(
+                "\"Fick du tag på skilsmässobeviset?\""
             );
 
+            Menu proofMenu = new Menu();
+
+            int choice = proofMenu.Ask(
+                "Vad svarar du?",
+                ["Ja", "Nej"]
+            );
+
+
+            // The player says yes
             if (choice == 1)
             {
-                // Group 8 verifies the player's claim for this conversation; it does not provide the item.
-                if (player.Backpack.Has(DivorceCertificateItem))
+                if (player.Backpack.Has("skilsmässobevis"))
                 {
-                    Console.WriteLine("Vad bra, du hittade skilsmässobeviset.");
-                    Console.WriteLine("Gå tillbaka till vigseln när ni är redo.");
+                    Console.WriteLine();
+                    Console.WriteLine("\"Perfekt! Visa det för prästen.\"");
+
+                    Console.WriteLine();
+                    Console.WriteLine(
+                        "\"Då kan vi fortsätta vigseln.\""
+                    );
+
                     return;
                 }
 
-                Console.WriteLine("Jag ser inte skilsmässobeviset i din ryggsäck.");
-                Console.WriteLine("Du behöver hitta det innan ni kan gifta er.");
+                Console.WriteLine();
+                Console.WriteLine(
+                    "\"Men du har ju inte skilsmässobeviset med dig.\""
+                );
+
                 return;
             }
 
-            Console.WriteLine("Då får vi vänta. Hitta skilsmässobeviset innan vigseln fortsätter.");
-            return;
-        }
-        else
-        {
-            // This plays out when you interact at the altar for the first time
-            // Here is when dramaHasStarted = false
-            Console.WriteLine("Partnern står vid altaret och ser orolig ut.");
-            Console.WriteLine("Partnern tittar på dig.");
-            Console.WriteLine("\"Är det sant? Är ni fortfarande gifta?\"");
 
-            // Menu.Ask returns the selected option as a 1-based number.
-            int choice = new Menu().Ask(
-                "Vad gör du?",
-                [
-                "Jag hämtar skilsmässobeviset.",
-                "Jag hämtar INTE skilsmässobeviset."
-                ]
-            );
-            if (choice == 1)
+            // The player says no
+            if (choice == 2)
             {
-                // The player must fetch the divorce certificate before continuing.
-                Console.WriteLine("\"Det är inte sant! Jag ska hämta skilsmässobeviset.\"");
-                Console.WriteLine("Du måste hämta skilsmässobeviset innan vigseln kan fortsätta.");
+                Console.WriteLine();
+                Console.WriteLine(
+                    "\"Okej. Vi kan inte fortsätta vigseln utan det.\""
+                );
+
                 return;
             }
-
-            // GameOver tells Game to stop the main loop after this interaction.
-            Console.WriteLine("GAME OVER!");
-            player.GameOver = true;
         }
     }
-
-    // This plays out when you interact at the altar for the first time
-    // Here is when dramaHasStarted = false
-    public override void Interact(Player player)
-    {
-        Interact(player, false);
-    }
-
 }
