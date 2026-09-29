@@ -7,7 +7,7 @@ class Game
 
   bool isRunning = true;
   Map map = new();
-  Player player = new(2, 0);
+  Player player = new(2, 1);
   Menu menu = new();
 
   public void Start()
