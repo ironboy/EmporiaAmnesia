@@ -11,7 +11,7 @@ class Church : Location
             "medan exet sitter längre bak bland bröllopsgästerna.";
 
         // The altar is south of the church
-        Directions = [Direction.South];
+        Directions = [Direction.South, Direction.North];
     }
 
     public override void Interact(Player player)
