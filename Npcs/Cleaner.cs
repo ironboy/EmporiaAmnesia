@@ -1,6 +1,5 @@
 class Cleaner : Npc
 {
-  private bool _cleanerTalk = false;
   public bool FindFriend = false;
 
   public Cleaner()
@@ -15,17 +14,13 @@ class Cleaner : Npc
       Console.WriteLine("\n\"Jag har redan sagt allt jag vet.\"");
       return;
     }
-
-    if (!_cleanerTalk)
     {
-      Console.WriteLine("\n\"Jag såg att du kom in med en kompis här igårkväll.\"");
-      Console.WriteLine("\n\"Ni verkade ha en viktig tillställning som väntade er.\"");
-      _cleanerTalk = true;
-      return;
-    }
-
-    Console.WriteLine("\n\"Jag har inget minne från igår, har du sett honom?\"");
-    Console.WriteLine("\"Han ligger där borta i hörnet utslagen.\"");
-    FindFriend = true;
+      Console.WriteLine("\n\"Städerskan såg att du kom in med en kompis här igårkväll.\"");
+      Console.WriteLine("\n\"Du har inget minne från igår och undrar om han också är här?\"");
+      Console.WriteLine("\"Städerskan pekar mot städförrådet.\"");
+      Console.WriteLine("\"Du går mot städförådet och öppnar nyfiket.\"");
+      FindFriend = true;
   }
 }
+}
+
