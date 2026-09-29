@@ -1,6 +1,6 @@
 class Keycard : Item
 {
-    public Keycard() : base("keycard", "Nyckelkort som leder till taket.")
+    public Keycard() : base("nyckelkort", "Nyckelkort som leder till taket.")
     {
     }
 }
