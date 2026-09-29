@@ -10,9 +10,13 @@ class CleaningCloset : Location
 
     public override void Interact(Player player)
     {
-        _friend.Interact(player);
-        player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
-        _money = true;
+        if (_money == false)
+        {
+            _friend.Interact(player);
+            player.Backpack.Add(new Item("pengar", "25.000kr, najs..."));
+            _money = true;
+        }
+
     }
 }
 
