@@ -11,13 +11,11 @@ class DryCleanerNPC : Npc
     
     public override void Interact(Player player)
     {
-        // Kvitto har lagts tillfälligt i ryggsäcken för att kunna testa. Ska egentligen hittas av grupp 1
-    player.Backpack.Add(new Item("kemtvättskvitto", "Kemtvättskvitto"));
-
+        
        // Steg 1: Om spelaren inte har fått kostymen än.
-        if (hasGivenCostume == false)
+        if (hasGivenCostume == false) 
         {
-            Console.Write("Kemtvättaren: Har du ditt kvitto med dig? Ja / Nej: ");
+            Console.Write("Mannen hoppar till! Vad gör du här och hur kom du in? Vi har inte öppet, det är ju mitt i natten! Du vill hämta en kostym? Har du kvitto? Ja / Nej");
         string? answer = Console.ReadLine();
 
         // Svarar Ja och har kvittot -> Får kostymen.

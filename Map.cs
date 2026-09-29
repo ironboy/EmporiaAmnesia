@@ -8,14 +8,13 @@ class Map
 
   public static Location?[][] Locations =
   [
-    [new Roof2(),        null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null],
-    [new Foyer(),        new Escalator2(),   new CorridorA(),          null,                      null,               null],
-    [new ToiletStall(),  null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null],
-    [null,               null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new Wedding()],
-    [new Staffarea1(),   new Staffarea2(),   new BackRoom(),           new SurveillanceRoom(),    null,               new Church()],
-    [null,               null,               null,                     null,                      null,               new Altar()]
+    [null,                 new Roof2(),         null,               new Escalator1(),         new Roof(),                new ParkingDeck(),  null,               null,               null,             null],
+    [new CleaningCloset(), new Foyer(),         new Escalator2(),   new CorridorA(),          null,                      null,               null,               null,               null,             null],
+    [null,                 new ToiletStall(),   null,               new OutsideDryCleaner(),  new CorridorB(),           null,               null,               null,               new LivingRoom(), null],
+    [null,                 null,                null,               new DryCleaner(),         new SecurityOffice(),      new TaxiStation(),  new OutsideChurch(),new OutsideHouse(), new TheHall(),    new Kitchen()],
+    [null,                 new Staffarea1(),    new Staffarea2(),   new BackRoom(),           new SurveillanceRoom(),    null,               new Church(),       null,               new Bedroom(),    null],
+    [null,                 null,                null,               null,                     null,                      null,               new Altar(),        null,               null,             null]
   ];
-
 
   // A static constructor runs once, after the static fields above have been
   // built - so this is the first moment the whole map exists. Every location

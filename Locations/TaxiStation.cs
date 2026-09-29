@@ -55,7 +55,7 @@ class TaxiStation : Location
     if (!player.GameOver)
     {
         Console.WriteLine("Du sätter dig i backsätet och taxin börjar att gasa iväg genom staden.");
-        player.Teleport("Wedding");
+        player.Teleport("OutsideChurch");
     }
   }
 }
