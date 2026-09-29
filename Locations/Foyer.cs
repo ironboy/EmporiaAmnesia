@@ -15,7 +15,7 @@ class Foyer : Location
 
   public override void Interact(Player player)
   {
-    if (cleanerCount > 2)
+    if (cleanerCount >= 1)
     {
       cleaner = false;
       friend = true;
