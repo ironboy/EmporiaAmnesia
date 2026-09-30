@@ -3,7 +3,7 @@ class Game
 
   // isDev allows you to teleport where you want anytime
   // set to false before shipping to normal customers
-  bool isDev = true;
+  bool isDev = false;
 
   bool isRunning = true;
   Map map = new();
