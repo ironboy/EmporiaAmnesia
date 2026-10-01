@@ -91,7 +91,7 @@ private void Play(Camera camera)
                 break;
             case Camera.Escalator:
                 Console.WriteLine("Ni står vid rulltrapporna när ni får syn på en säkerhetsvakt. Mannen i fluga kollar på sin klocka, verkar få panik.");
-                Console.WriteLine("Han tar av sig ryggsäcken, stoppar ner en tjock sedelbunt i den och hänger den på din rygg.");
+                Console.WriteLine("Han tar av sig ryggsäcken, hänger den på din rygg.. Han försöker lägga in något annat i ryggsäcken men hinner inte");
                 Console.WriteLine("Han pekar upp mot kemtvätten, ger dig en snabb kram och springer sedan skrikandes åt andra hållet för att avleda vakten.");
                 break;
             case Camera.Toilets:
@@ -99,8 +99,8 @@ private void Play(Camera camera)
                 Console.WriteLine("Du slår handen över munnen, ser grön ut i ansiktet och springer snublandes med ryggsäcken på ryggen in på toaletterna.");
                 break;
                 case Camera.Entrance2:
-                Console.WriteLine("Mannen i fluga har blivit fångad av säkerhetsvakten vid entrén.");
-                Console.WriteLine("Vakten pekar argt på sin klocka och kastarut din vän genom dörrarna.");
+                Console.WriteLine("Mannen i fluga springer förbi entrén och gömmer sig utom räckhåll för kamerorna.");
+                Console.WriteLine("Vakten är förvirrad och försöker klura ut vilket håll mannen i flugan sprang.");
                 break;
             case Camera.Toilets2:
                 Console.WriteLine("Emporia är nu nedsläckt och låst.");
@@ -115,9 +115,9 @@ private void Play(Camera camera)
     {
         Console.WriteLine("\nBilderna faller på plats. Mannen i fluga är din bästa vän och best man.");        
         Console.WriteLine("Han råkade spilla rödvin på din kostym under svensexan, så ni åkte till Emporia för att paniktvätta den.");
-        Console.WriteLine("Pengarna i ryggsäcken är dina vänners present till bröllopsresan.");
-        Console.WriteLine("När vakten skulle kasta ut er vid stängning offrade han sig så att du skulle hinna hämta kostymen...");
-        Console.WriteLine("...men istället däckade du på toaletten. Med hans ryggsäck, kvittot och alla pengarna.");
+        Console.WriteLine("Pengarna du hittade på honom är dina vänners present till bröllopsresan.");
+        Console.WriteLine("När vakten skulle kasta ut er vid stängning offrade han sig och gömde sig någonstans i Emporia, så att du skulle hinna hämta kostymen...");
+        Console.WriteLine("...men istället däckade du på toaletten. Med hans ryggsäck.");
         Console.WriteLine("\nBröllopet är idag. Och du måste ut härifrån.");
     }
 }

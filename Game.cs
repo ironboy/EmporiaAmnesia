@@ -3,11 +3,11 @@ class Game
 
   // isDev allows you to teleport where you want anytime
   // set to false before shipping to normal customers
-  bool isDev = true;
+  bool isDev = false;
 
   bool isRunning = true;
   Map map = new();
-  Player player = new(2, 0);
+  Player player = new(2, 1);
   Menu menu = new();
 
   public void Start()
